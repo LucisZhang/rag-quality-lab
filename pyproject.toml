@@ -1,0 +1,17 @@
+# Tool configuration only - this repo is not packaged for distribution.
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+# Ruff's default rule set (pycodestyle errors + pyflakes), made explicit.
+select = ["E4", "E7", "E9", "F"]
+
+[tool.ruff.lint.per-file-ignores]
+# April-era provenance artifact (proves the MS MARCO derivation, see DATA.md);
+# kept byte-identical to the script that produced the corpus.
+"scale_up_dataset.py" = ["E401", "E701", "F541"]

@@ -1,0 +1,27 @@
+[
+  {
+    "id": "synthetic_0001",
+    "title": "SYNTHETIC SAMPLE - Aurora Widget Assembly Guide",
+    "content": "THIS IS A SYNTHETIC RECORD, NOT REAL CORPUS DATA. It exists only to document the schema of data/large_knowledge_base.json, whose real records are not republished in this repository pending dataset license verification. The fictional Aurora Widget Company assembles Model-A widgets in three stages: frame casting, coil winding, and calibration. Each stage records a pass/fail status in the plant ledger."
+  },
+  {
+    "id": "synthetic_0002",
+    "title": "SYNTHETIC SAMPLE - Aurora Widget Warranty Policy",
+    "content": "THIS IS A SYNTHETIC RECORD, NOT REAL CORPUS DATA. Fictional policy text: Model-A widgets carry a 24-month warranty covering coil and frame defects. Calibration drift is covered for 6 months. Warranty claims require the plant ledger serial and the original calibration report."
+  },
+  {
+    "id": "synthetic_0003",
+    "title": "SYNTHETIC SAMPLE - Aurora Support FAQ, Shipping",
+    "content": "THIS IS A SYNTHETIC RECORD, NOT REAL CORPUS DATA. Fictional FAQ text: Standard shipping for widget orders takes 5 business days inside the fictional region of Northland. Expedited shipping takes 2 business days. Orders above 40 units ship freight and include a packing manifest."
+  },
+  {
+    "id": "synthetic_0004",
+    "title": "SYNTHETIC SAMPLE - Aurora Returns Procedure",
+    "content": "THIS IS A SYNTHETIC RECORD, NOT REAL CORPUS DATA. Fictional procedure text: Returns are accepted within 30 days with the packing manifest. Refunds post to the original payment method in 7 business days. Widgets with calibration drift beyond tolerance are exchanged rather than refunded."
+  },
+  {
+    "id": "synthetic_0005",
+    "title": "SYNTHETIC SAMPLE - Aurora Model-B Release Notes",
+    "content": "THIS IS A SYNTHETIC RECORD, NOT REAL CORPUS DATA. Fictional release notes: Model-B widgets add a self-calibration loop and a sealed coil housing. The plant ledger schema gains a firmware_version field. Model-A accessories remain compatible except the external calibration jig."
+  }
+]

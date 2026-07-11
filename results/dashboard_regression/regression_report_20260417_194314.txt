@@ -1,0 +1,57 @@
+RAG 知识库回归测试报告
+================================================================================
+生成时间: 2026-04-17 19:43:14
+评测数据集: data/eval_questions.json
+问题总数: 12
+结果概览: 退化 4 题 | 改进 0 题 | 稳定 8 题
+
+总体指标对比
+--------------------------------------------------------------------------------
+metric                  baseline     updated        diff
+--------------------------------------------------------------------------------
+faithfulness               0.887       0.875      -0.012
+answer_relevancy           0.804       0.787      -0.017
+context_precision          0.784       0.769      -0.015
+context_recall             0.800       0.733      -0.067
+answer_correctness         0.771       0.758      -0.013
+retrieval_precision        0.396       0.340      -0.056
+retrieval_recall           0.917       0.917      +0.000
+retrieval_hit              0.917       0.917      +0.000
+
+退化问题列表 (4)
+--------------------------------------------------------------------------------
+1. What is faithfulness in the context of RAG evaluation?
+   退化指标: retrieval_precision
+   指标变化: retrieval_precision(-0.167)
+   相关文档: doc_004
+   Baseline 检索: doc_004, doc_002
+   Updated 检索: doc_004, doc_002, doc_005
+2. What are the main challenges of large language models?
+   退化指标: answer_relevancy, context_precision, context_recall, answer_correctness, retrieval_precision
+   指标变化: answer_relevancy(-0.150), context_precision(-0.250), context_recall(-0.500), answer_correctness(-0.150), retrieval_precision(-0.167)
+   相关文档: doc_006
+   Baseline 检索: doc_006, doc_002
+   Updated 检索: doc_006, doc_002, doc_007
+3. How does RAGAS evaluate RAG systems?
+   退化指标: answer_relevancy, context_recall, retrieval_precision
+   指标变化: answer_relevancy(-0.150), context_recall(-0.300), retrieval_precision(-0.167)
+   相关文档: doc_004
+   Baseline 检索: doc_004, doc_001
+   Updated 检索: doc_004, doc_001, doc_002
+4. What is the difference between naive RAG and advanced RAG?
+   退化指标: retrieval_precision
+   指标变化: retrieval_precision(-0.167)
+   相关文档: doc_002
+   Baseline 检索: doc_006, doc_002
+   Updated 检索: doc_006, doc_002, doc_004
+
+改进问题列表 (0)
+--------------------------------------------------------------------------------
+无显著改进问题。
+
+结论与建议
+--------------------------------------------------------------------------------
+- 存在 4 道退化题，优先复核这些问题的检索结果、chunk 切分和知识条目覆盖范围。
+- 整体下降最明显的指标为 context_recall, retrieval_precision, answer_relevancy，建议先定位这些指标对应的失败样例。
+- 检索命中指标出现下降，优先核对 relevant_doc_ids 是否仍能被召回，以及新增内容是否干扰了原有排序。
+- 共有 8 道题保持稳定，可继续扩大评测集覆盖更多边界问题。

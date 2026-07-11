@@ -1,0 +1,15 @@
+langchain
+langchain-community
+langchain-ollama
+langchain-chroma
+langchain-huggingface
+chromadb
+ragas
+datasets
+rank-bm25
+sentence-transformers
+streamlit
+plotly
+pandas
+numpy
+openpyxl

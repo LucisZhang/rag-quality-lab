@@ -1,0 +1,86 @@
+[
+  {
+    "question": "What is the self-attention mechanism in Transformers and why is it important?",
+    "ground_truth": "Self-attention is a mechanism that computes attention scores between all pairs of positions in a sequence, allowing the model to capture long-range dependencies efficiently. Unlike RNNs, it processes all positions simultaneously.",
+    "relevant_doc_ids": [
+      "doc_001"
+    ]
+  },
+  {
+    "question": "What are the main components of a RAG system?",
+    "ground_truth": "A RAG system consists of a retriever component that searches a knowledge base for relevant documents, and a language model that generates answers grounded in the retrieved information. The retrieval typically uses dense vector embeddings to find similar passages.",
+    "relevant_doc_ids": [
+      "doc_002"
+    ]
+  },
+  {
+    "question": "How does BM25 differ from vector-based retrieval, and why is hybrid search effective?",
+    "ground_truth": "BM25 is a probabilistic lexical ranking function based on term frequency and document length, while vector retrieval uses dense embeddings for semantic similarity. Hybrid search combines both to leverage BM25's strength in exact term matching with vector search's semantic understanding. Re-ranking with cross-encoders further improves results.",
+    "relevant_doc_ids": [
+      "doc_005"
+    ]
+  },
+  {
+    "question": "What is faithfulness in the context of RAG evaluation?",
+    "ground_truth": "Faithfulness measures whether the generated answer is supported by the retrieved context. It assesses if the claims in the answer can be traced back to the information in the retrieved documents, rather than being hallucinated.",
+    "relevant_doc_ids": [
+      "doc_004"
+    ]
+  },
+  {
+    "question": "What are the different chunking strategies for RAG and how do they affect retrieval quality?",
+    "ground_truth": "Common chunking strategies include fixed-size, sentence-based, paragraph-based, and semantic chunking. Smaller chunks provide more precise retrieval but may lack context, while larger chunks preserve context but may include irrelevant information. Advanced strategies include hierarchical and agentic chunking.",
+    "relevant_doc_ids": [
+      "doc_008"
+    ]
+  },
+  {
+    "question": "What algorithms do vector databases use for similarity search?",
+    "ground_truth": "Vector databases use approximate nearest neighbor (ANN) algorithms including HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale.",
+    "relevant_doc_ids": [
+      "doc_003"
+    ]
+  },
+  {
+    "question": "What is GraphRAG and how does it improve over standard vector-based RAG?",
+    "ground_truth": "GraphRAG combines graph-based retrieval with language model generation. It extracts entities and relationships into a knowledge graph, enabling structured retrieval that captures multi-hop relationships that vector similarity search might miss. Advantages include better handling of complex relational queries and explicit reasoning chains.",
+    "relevant_doc_ids": [
+      "doc_007"
+    ]
+  },
+  {
+    "question": "What are the main challenges of large language models?",
+    "ground_truth": "Key challenges include hallucination (generating plausible but incorrect information), context window limitations, high computational costs, and safety concerns. These limitations motivate techniques like RAG for grounding outputs in factual sources.",
+    "relevant_doc_ids": [
+      "doc_006"
+    ]
+  },
+  {
+    "question": "How does RAGAS evaluate RAG systems?",
+    "ground_truth": "RAGAS provides automated evaluation using LLM-as-judge approaches, measuring metrics like faithfulness, answer relevancy, context precision, context recall, and answer correctness. It uses a language model to assess these qualities automatically.",
+    "relevant_doc_ids": [
+      "doc_004"
+    ]
+  },
+  {
+    "question": "What is the difference between naive RAG and advanced RAG?",
+    "ground_truth": "Naive RAG uses a simple retrieve-then-generate approach. Advanced RAG adds techniques like query rewriting, re-ranking, and filtering to improve retrieval and generation quality. Modular RAG further introduces interchangeable components for flexible pipeline design.",
+    "relevant_doc_ids": [
+      "doc_002"
+    ]
+  },
+  {
+    "question": "How does multi-head attention work in Transformers?",
+    "ground_truth": "Multi-head attention runs multiple attention functions in parallel, allowing the model to attend to information from different representation subspaces simultaneously. Each head learns different attention patterns.",
+    "relevant_doc_ids": [
+      "doc_001"
+    ]
+  },
+  {
+    "question": "What is reciprocal rank fusion in hybrid search?",
+    "ground_truth": "Reciprocal rank fusion (RRF) is a method for combining scores from multiple retrieval methods (like BM25 and vector search) in hybrid search. It merges the ranked lists from different retrievers into a single ranking.",
+    "relevant_doc_ids": [
+      "doc_005"
+    ]
+  }
+]

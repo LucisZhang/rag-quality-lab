@@ -1,0 +1,30 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+
+# Local Python environment
+venv/
+.venv/
+
+# Local runtime symlink/cache
+node_modules/
+
+# Local vector stores and temporary probes
+chroma_db/
+chroma_db_app/
+chroma_db_benchmarks/
+chroma_db_diag/
+tmp_chroma_probe/
+tmp_chroma_smoke/
+
+# Duplicate source snapshots and generated artifacts
+Code/
+outputs/
+benchmark_artifacts/
+results/regression_runtime/
+results/regression_smoke/
+evidence/verified-2026-07/fresh-*/runtime/
+
+# Full corpus stays out of git; A4 will replace it with manifest/sample/checksum docs.
+data/large_knowledge_base.json
+data/large_eval_questions.json

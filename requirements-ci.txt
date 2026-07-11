@@ -1,0 +1,11 @@
+# Lightweight dependencies for CI: lint + model-free unit tests + data verifiers.
+# No torch / chromadb / ollama stacks - CI never runs model inference; the unit
+# tests stub those imports (tests/dependency_stubs.py) and mock all LLM calls.
+# Versions match requirements-lock-py311.txt wherever the package appears there.
+langchain-core==0.3.84
+langchain-text-splitters==0.3.11
+rank-bm25==0.2.2
+pandas==2.2.3
+numpy==1.26.4
+pytest==8.4.1
+ruff==0.12.4

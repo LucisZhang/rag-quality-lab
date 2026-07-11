@@ -1,0 +1,1663 @@
+{
+  "pipeline_label": "Pipeline A (Naive Vector)",
+  "max_questions": 12,
+  "baseline_summary": {
+    "faithfulness": {
+      "mean": 0.8874999999999998,
+      "min": 0.1,
+      "max": 1.0,
+      "std": 0.2629595544427456
+    },
+    "answer_relevancy": {
+      "mean": 0.8041666666666667,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.37866892071458874
+    },
+    "context_precision": {
+      "mean": 0.7841666666666667,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.3740796787592265
+    },
+    "context_recall": {
+      "mean": 0.7999999999999999,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.3789938833759242
+    },
+    "answer_correctness": {
+      "mean": 0.7708333333333334,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.3750505016499495
+    },
+    "retrieval_precision": {
+      "mean": 0.3958333333333333,
+      "min": 0.0,
+      "max": 0.5,
+      "std": 0.15539539012701525
+    },
+    "retrieval_recall": {
+      "mean": 0.9166666666666666,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.28867513459481287
+    },
+    "retrieval_hit": {
+      "mean": 0.9166666666666666,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.28867513459481287
+    }
+  },
+  "updated_summary": {
+    "faithfulness": {
+      "mean": 0.875,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.2981000442194472
+    },
+    "answer_relevancy": {
+      "mean": 0.7875,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.3581042255595937
+    },
+    "context_precision": {
+      "mean": 0.7691666666666667,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.36099504739320765
+    },
+    "context_recall": {
+      "mean": 0.7333333333333334,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.40526833609649826
+    },
+    "answer_correctness": {
+      "mean": 0.7583333333333333,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.3818813079129867
+    },
+    "retrieval_precision": {
+      "mean": 0.34027777777777785,
+      "min": 0.0,
+      "max": 0.5,
+      "std": 0.13511280983116067
+    },
+    "retrieval_recall": {
+      "mean": 0.9166666666666666,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.28867513459481287
+    },
+    "retrieval_hit": {
+      "mean": 0.9166666666666666,
+      "min": 0.0,
+      "max": 1.0,
+      "std": 0.28867513459481287
+    }
+  },
+  "overall_diff": {
+    "faithfulness": {
+      "baseline": 0.8874999999999998,
+      "updated": 0.875,
+      "diff": -0.012499999999999845
+    },
+    "answer_relevancy": {
+      "baseline": 0.8041666666666667,
+      "updated": 0.7875,
+      "diff": -0.01666666666666672
+    },
+    "context_precision": {
+      "baseline": 0.7841666666666667,
+      "updated": 0.7691666666666667,
+      "diff": -0.015000000000000013
+    },
+    "context_recall": {
+      "baseline": 0.7999999999999999,
+      "updated": 0.7333333333333334,
+      "diff": -0.06666666666666654
+    },
+    "answer_correctness": {
+      "baseline": 0.7708333333333334,
+      "updated": 0.7583333333333333,
+      "diff": -0.012500000000000067
+    },
+    "retrieval_precision": {
+      "baseline": 0.3958333333333333,
+      "updated": 0.34027777777777785,
+      "diff": -0.05555555555555547
+    },
+    "retrieval_recall": {
+      "baseline": 0.9166666666666666,
+      "updated": 0.9166666666666666,
+      "diff": 0.0
+    },
+    "retrieval_hit": {
+      "baseline": 0.9166666666666666,
+      "updated": 0.9166666666666666,
+      "diff": 0.0
+    }
+  },
+  "per_question_diff": [
+    {
+      "question": "What is the self-attention mechanism in Transformers and why is it important?",
+      "relevant_doc_ids": [
+        "doc_001"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_001",
+        "doc_006"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_001",
+        "doc_006"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_001"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_001"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.98,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.98,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": []
+    },
+    {
+      "question": "What are the main components of a RAG system?",
+      "relevant_doc_ids": [
+        "doc_002"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_003",
+        "doc_002",
+        "doc_001",
+        "doc_006"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_003",
+        "doc_002",
+        "doc_001",
+        "doc_006"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_002"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_002"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.95,
+        "retrieval_precision": 0.25,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.95,
+        "retrieval_precision": 0.25,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": []
+    },
+    {
+      "question": "How does BM25 differ from vector-based retrieval, and why is hybrid search effective?",
+      "relevant_doc_ids": [
+        "doc_005"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_005",
+        "doc_003",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_005",
+        "doc_003",
+        "doc_009"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_005"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_005"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.95,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.95,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": []
+    },
+    {
+      "question": "What is faithfulness in the context of RAG evaluation?",
+      "relevant_doc_ids": [
+        "doc_004"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_004",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_004",
+        "doc_002",
+        "doc_005"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_004"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_004"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 0.95,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": -0.050000000000000044,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": -0.16666666666666669,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "degraded",
+      "degraded_metrics": [
+        "retrieval_precision"
+      ]
+    },
+    {
+      "question": "What are the different chunking strategies for RAG and how do they affect retrieval quality?",
+      "relevant_doc_ids": [
+        "doc_008"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_008",
+        "doc_002",
+        "doc_004"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_008",
+        "doc_005",
+        "doc_004"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_008"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_008"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": []
+    },
+    {
+      "question": "What algorithms do vector databases use for similarity search?",
+      "relevant_doc_ids": [
+        "doc_003"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_003",
+        "doc_005",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_003",
+        "doc_005",
+        "doc_009"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_003"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_003"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.98,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.020000000000000018,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": []
+    },
+    {
+      "question": "What is GraphRAG and how does it improve over standard vector-based RAG?",
+      "relevant_doc_ids": [
+        "doc_007"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_003",
+        "doc_006"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_003",
+        "doc_006"
+      ],
+      "baseline_matched_relevant_doc_ids": [],
+      "updated_matched_relevant_doc_ids": [],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": []
+    },
+    {
+      "question": "What are the main challenges of large language models?",
+      "relevant_doc_ids": [
+        "doc_006"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_006",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_006",
+        "doc_002",
+        "doc_007"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_006"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_006"
+      ],
+      "baseline_scores": {
+        "faithfulness": 0.9,
+        "answer_relevancy": 0.95,
+        "context_precision": 0.85,
+        "context_recall": 0.8,
+        "answer_correctness": 0.65,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8,
+        "context_precision": 0.6,
+        "context_recall": 0.3,
+        "answer_correctness": 0.5,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.09999999999999998,
+        "answer_relevancy": -0.1499999999999999,
+        "context_precision": -0.25,
+        "context_recall": -0.5,
+        "answer_correctness": -0.15000000000000002,
+        "retrieval_precision": -0.16666666666666669,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "degraded",
+      "degraded_metrics": [
+        "answer_relevancy",
+        "context_precision",
+        "context_recall",
+        "answer_correctness",
+        "retrieval_precision"
+      ]
+    },
+    {
+      "question": "How does RAGAS evaluate RAG systems?",
+      "relevant_doc_ids": [
+        "doc_004"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_004",
+        "doc_001"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_004",
+        "doc_001",
+        "doc_002"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_004"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_004"
+      ],
+      "baseline_scores": {
+        "faithfulness": 0.7,
+        "answer_relevancy": 0.85,
+        "context_precision": 0.75,
+        "context_recall": 0.9,
+        "answer_correctness": 0.8,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.7,
+        "context_precision": 0.7,
+        "context_recall": 0.6,
+        "answer_correctness": 0.8,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": -0.09999999999999998,
+        "answer_relevancy": -0.15000000000000002,
+        "context_precision": -0.050000000000000044,
+        "context_recall": -0.30000000000000004,
+        "answer_correctness": 0.0,
+        "retrieval_precision": -0.16666666666666669,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "degraded",
+      "degraded_metrics": [
+        "answer_relevancy",
+        "context_recall",
+        "retrieval_precision"
+      ]
+    },
+    {
+      "question": "What is the difference between naive RAG and advanced RAG?",
+      "relevant_doc_ids": [
+        "doc_002"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_006",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_006",
+        "doc_002",
+        "doc_004"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_002"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_002"
+      ],
+      "baseline_scores": {
+        "faithfulness": 0.1,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.1,
+        "context_precision": 0.1,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": -0.1,
+        "answer_relevancy": 0.1,
+        "context_precision": 0.1,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": -0.16666666666666669,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "degraded",
+      "degraded_metrics": [
+        "retrieval_precision"
+      ]
+    },
+    {
+      "question": "How does multi-head attention work in Transformers?",
+      "relevant_doc_ids": [
+        "doc_001"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_001",
+        "doc_006"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_001",
+        "doc_006"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_001"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_001"
+      ],
+      "baseline_scores": {
+        "faithfulness": 0.95,
+        "answer_relevancy": 0.95,
+        "context_precision": 0.95,
+        "context_recall": 0.9,
+        "answer_correctness": 0.9,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 0.95,
+        "answer_relevancy": 0.95,
+        "context_precision": 0.95,
+        "context_recall": 0.9,
+        "answer_correctness": 0.9,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": []
+    },
+    {
+      "question": "What is reciprocal rank fusion in hybrid search?",
+      "relevant_doc_ids": [
+        "doc_005"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_005",
+        "doc_003"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_005",
+        "doc_003"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_005"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_005"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9,
+        "context_precision": 0.9,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9,
+        "context_precision": 0.9,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": []
+    }
+  ],
+  "degraded_questions": [
+    "What is faithfulness in the context of RAG evaluation?",
+    "What are the main challenges of large language models?",
+    "How does RAGAS evaluate RAG systems?",
+    "What is the difference between naive RAG and advanced RAG?"
+  ],
+  "improved_questions": [],
+  "stable_questions": [
+    "What is the self-attention mechanism in Transformers and why is it important?",
+    "What are the main components of a RAG system?",
+    "How does BM25 differ from vector-based retrieval, and why is hybrid search effective?",
+    "What are the different chunking strategies for RAG and how do they affect retrieval quality?",
+    "What algorithms do vector databases use for similarity search?",
+    "What is GraphRAG and how does it improve over standard vector-based RAG?",
+    "How does multi-head attention work in Transformers?",
+    "What is reciprocal rank fusion in hybrid search?"
+  ],
+  "detail_rows": [
+    {
+      "question": "What is the self-attention mechanism in Transformers and why is it important?",
+      "relevant_doc_ids": [
+        "doc_001"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_001",
+        "doc_006"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_001",
+        "doc_006"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_001"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_001"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.98,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.98,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": [],
+      "baseline_answer": "The self-attention mechanism is a mechanism that processes all positions in a sequence simultaneously, unlike recurrent neural networks (RNNs). It computes attention scores between all pairs of positions.\n\nThis mechanism is important because it allows the model to capture long-range dependencies efficiently.",
+      "updated_answer": "The self-attention mechanism is a mechanism that processes all positions in a sequence simultaneously, unlike recurrent neural networks (RNNs). It computes attention scores between all pairs of positions.\n\nThis mechanism is important because it allows the model to capture long-range dependencies efficiently.",
+      "baseline_contexts": [
+        "The Transformer is a deep learning architecture introduced in the paper \"Attention Is All You Need\" by Vaswani et al. in 2017. Unlike recurrent neural networks (RNNs), Transformers process all positions in a sequence simultaneously using a mechanism called self-attention. The architecture consists of an encoder and a decoder, each made up of multiple layers. Each layer in the encoder has two sub-layers: a multi-head self-attention mechanism and a position-wise fully connected feed-forward network. The",
+        "attention runs multiple attention functions in parallel, allowing the model to attend to information from different representation subspaces. The Transformer has become the foundation for most modern NLP models, including BERT, GPT, and T5.",
+        "and a position-wise fully connected feed-forward network. The decoder has an additional cross-attention sub-layer. Transformers use positional encoding to inject information about the position of tokens in the sequence, since the architecture itself has no inherent notion of order. The self-attention mechanism computes attention scores between all pairs of positions, allowing the model to capture long-range dependencies efficiently. Multi-head attention runs multiple attention functions in parallel,",
+        "alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit emergent capabilities such as in-context learning, chain-of-thought reasoning, and instruction following. Fine-tuning techniques include supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), and parameter-efficient methods like LoRA. Challenges include hallucination (generating plausible but incorrect information), context window limitations, computational costs, and safety concerns. The trend toward smaller, more efficient"
+      ],
+      "updated_contexts": [
+        "The Transformer is a deep learning architecture introduced in the paper \"Attention Is All You Need\" by Vaswani et al. in 2017. Unlike recurrent neural networks (RNNs), Transformers process all positions in a sequence simultaneously using a mechanism called self-attention. The architecture consists of an encoder and a decoder, each made up of multiple layers. Each layer in the encoder has two sub-layers: a multi-head self-attention mechanism and a position-wise fully connected feed-forward network. The",
+        "attention runs multiple attention functions in parallel, allowing the model to attend to information from different representation subspaces. The Transformer has become the foundation for most modern NLP models, including BERT, GPT, and T5.",
+        "and a position-wise fully connected feed-forward network. The decoder has an additional cross-attention sub-layer. Transformers use positional encoding to inject information about the position of tokens in the sequence, since the architecture itself has no inherent notion of order. The self-attention mechanism computes attention scores between all pairs of positions, allowing the model to capture long-range dependencies efficiently. Multi-head attention runs multiple attention functions in parallel,",
+        "alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit emergent capabilities such as in-context learning, chain-of-thought reasoning, and instruction following. Fine-tuning techniques include supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), and parameter-efficient methods like LoRA. Challenges include hallucination (generating plausible but incorrect information), context window limitations, computational costs, and safety concerns. The trend toward smaller, more efficient"
+      ]
+    },
+    {
+      "question": "What are the main components of a RAG system?",
+      "relevant_doc_ids": [
+        "doc_002"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_003",
+        "doc_002",
+        "doc_001",
+        "doc_006"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_003",
+        "doc_002",
+        "doc_001",
+        "doc_006"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_002"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_002"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.95,
+        "retrieval_precision": 0.25,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.95,
+        "retrieval_precision": 0.25,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": [],
+      "baseline_answer": "In a RAG system, when a query is received, the main components are:\n\n1.  A **retriever component**, which searches a knowledge base to find relevant documents.\n2.  A **language model**, which uses the retrieved documents as context to generate an answer.",
+      "updated_answer": "In a RAG system, when a query is received, the main components are:\n\n1.  A **retriever component**, which searches a knowledge base to find relevant documents.\n2.  A **language model**, which uses the retrieved documents as context to generate an answer.",
+      "baseline_contexts": [
+        "Vector databases are specialized database systems designed to store, index, and query high-dimensional vector data efficiently. They are essential infrastructure for AI applications that rely on similarity search, such as recommendation systems, image retrieval, and RAG systems. Popular vector databases include Pinecone, Weaviate, Qdrant, Milvus, and ChromaDB. These databases use approximate nearest neighbor (ANN) algorithms like HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ",
+        "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the",
+        "attention runs multiple attention functions in parallel, allowing the model to attend to information from different representation subspaces. The Transformer has become the foundation for most modern NLP models, including BERT, GPT, and T5.",
+        "alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit emergent capabilities such as in-context learning, chain-of-thought reasoning, and instruction following. Fine-tuning techniques include supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), and parameter-efficient methods like LoRA. Challenges include hallucination (generating plausible but incorrect information), context window limitations, computational costs, and safety concerns. The trend toward smaller, more efficient"
+      ],
+      "updated_contexts": [
+        "Vector databases are specialized database systems designed to store, index, and query high-dimensional vector data efficiently. They are essential infrastructure for AI applications that rely on similarity search, such as recommendation systems, image retrieval, and RAG systems. Popular vector databases include Pinecone, Weaviate, Qdrant, Milvus, and ChromaDB. These databases use approximate nearest neighbor (ANN) algorithms like HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ",
+        "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the",
+        "attention runs multiple attention functions in parallel, allowing the model to attend to information from different representation subspaces. The Transformer has become the foundation for most modern NLP models, including BERT, GPT, and T5.",
+        "alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit emergent capabilities such as in-context learning, chain-of-thought reasoning, and instruction following. Fine-tuning techniques include supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), and parameter-efficient methods like LoRA. Challenges include hallucination (generating plausible but incorrect information), context window limitations, computational costs, and safety concerns. The trend toward smaller, more efficient"
+      ]
+    },
+    {
+      "question": "How does BM25 differ from vector-based retrieval, and why is hybrid search effective?",
+      "relevant_doc_ids": [
+        "doc_005"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_005",
+        "doc_003",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_005",
+        "doc_003",
+        "doc_009"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_005"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_005"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.95,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 0.95,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": [],
+      "baseline_answer": "BM25 is a lexical search method used for keyword-heavy queries and exact term matching. In contrast, vector-based retrieval performs semantic search by computing distances (such as cosine similarity, Euclidean distance, or dot product) between vector representations to find items that are semantically similar.\n\nHybrid search is effective because it combines BM25 (lexical search) with dense vector retrieval (semantic search) to leverage the strengths of both approaches.",
+      "updated_answer": "BM25 is a lexical search method used for keyword-heavy queries and exact term matching. In contrast, vector-based retrieval performs semantic search by computing distances (such as cosine similarity, Euclidean distance, or dot product) between vector representations to find items that are semantically similar.\n\nHybrid search is effective because it combines the strengths of both approaches: BM25 (lexical search) and dense vector retrieval (semantic search).",
+      "baseline_contexts": [
+        "tasks, especially for keyword-heavy queries and exact term matching. Hybrid search combines BM25 (lexical search) with dense vector retrieval (semantic search) to leverage the strengths of both approaches. In hybrid search, scores from both methods are typically combined using reciprocal rank fusion (RRF) or linear interpolation. Cross-encoder re-ranking is often applied as a second stage: after retrieving candidates from both BM25 and vector search, a cross-encoder model scores each query-document pair",
+        "Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale. Unlike traditional databases that use exact matching, vector databases find items that are semantically similar by computing distances (cosine similarity, Euclidean distance, or dot product) between vector representations. Key features include support for metadata filtering, hybrid search (combining vector and keyword search), real-time indexing, and horizontal scaling. ChromaDB is an",
+        "the language model, which generates an answer grounded in the retrieved information. The retrieval step typically uses dense vector representations (embeddings) of both the query and documents, computing similarity scores to find the most relevant passages. RAG systems can be categorized into naive RAG (simple retrieve-then-generate), advanced RAG (with query rewriting, re-ranking, and filtering), and modular RAG (with interchangeable components). Key challenges in RAG include retrieval quality, context",
+        "Vector databases are specialized database systems designed to store, index, and query high-dimensional vector data efficiently. They are essential infrastructure for AI applications that rely on similarity search, such as recommendation systems, image retrieval, and RAG systems. Popular vector databases include Pinecone, Weaviate, Qdrant, Milvus, and ChromaDB. These databases use approximate nearest neighbor (ANN) algorithms like HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ"
+      ],
+      "updated_contexts": [
+        "tasks, especially for keyword-heavy queries and exact term matching. Hybrid search combines BM25 (lexical search) with dense vector retrieval (semantic search) to leverage the strengths of both approaches. In hybrid search, scores from both methods are typically combined using reciprocal rank fusion (RRF) or linear interpolation. Cross-encoder re-ranking is often applied as a second stage: after retrieving candidates from both BM25 and vector search, a cross-encoder model scores each query-document pair",
+        "Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale. Unlike traditional databases that use exact matching, vector databases find items that are semantically similar by computing distances (cosine similarity, Euclidean distance, or dot product) between vector representations. Key features include support for metadata filtering, hybrid search (combining vector and keyword search), real-time indexing, and horizontal scaling. ChromaDB is an",
+        "Vector databases are specialized database systems designed to store, index, and query high-dimensional vector data efficiently. They are essential infrastructure for AI applications that rely on similarity search, such as recommendation systems, image retrieval, and RAG systems. Popular vector databases include Pinecone, Weaviate, Qdrant, Milvus, and ChromaDB. These databases use approximate nearest neighbor (ANN) algorithms like HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ",
+        "vector search, keyword search, or structured queries based on query type; (3) Self-reflection - the agent checks whether retrieved context is sufficient before generating; (4) Tool use - the agent can call APIs, databases, or calculators as needed. Frameworks like LangGraph and CrewAI enable building agentic RAG systems with state management and multi-step reasoning. While agentic RAG improves answer quality for complex queries, it introduces challenges in latency (multiple LLM calls), cost, debugging"
+      ]
+    },
+    {
+      "question": "What is faithfulness in the context of RAG evaluation?",
+      "relevant_doc_ids": [
+        "doc_004"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_004",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_004",
+        "doc_002",
+        "doc_005"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_004"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_004"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 0.95,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": -0.050000000000000044,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": -0.16666666666666669,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "degraded",
+      "degraded_metrics": [
+        "retrieval_precision"
+      ],
+      "baseline_answer": "Faithfulness is a key generation quality metric that measures whether the generated answer is supported by the retrieved context.",
+      "updated_answer": "Faithfulness measures whether claims in the answer are supported by retrieved context.",
+      "baseline_contexts": [
+        "the answer addresses the question), and answer correctness (whether the answer matches the ground truth). The RAGAS framework provides automated evaluation using LLM-as-judge approaches, where a language model assesses these qualities. Beyond automated metrics, human evaluation remains important for assessing aspects like fluency, completeness, and usefulness. A/B testing in production environments can measure real-world impact metrics such as user satisfaction and task completion rates. Regression testing",
+        "Evaluating RAG systems requires measuring both retrieval quality and generation quality. Common retrieval metrics include context precision (what fraction of retrieved documents are relevant), context recall (what fraction of relevant documents are retrieved), and Mean Reciprocal Rank (MRR). For generation quality, key metrics include faithfulness (whether the generated answer is supported by the retrieved context), answer relevancy (whether the answer addresses the question), and answer correctness",
+        "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the",
+        "Key challenges in RAG include retrieval quality, context window limitations, faithfulness of generated answers to retrieved context, and handling conflicting information across sources."
+      ],
+      "updated_contexts": [
+        "context, answer relevancy measures topical alignment with the question, and answer correctness compares against ground truth references. The RAGAS framework (2024-2026) has become the de facto standard for automated RAG evaluation, using LLM-as-judge methodology. Newer evaluation approaches include reference-free evaluation (no ground truth needed), component-level diagnostics (pinpointing whether failures come from retrieval, context selection, or generation), and adversarial testing (probing for",
+        "Evaluating RAG systems requires measuring both retrieval quality and generation quality across multiple dimensions. For retrieval, the primary metrics are context precision (fraction of retrieved passages that are relevant), context recall (fraction of ground-truth relevant passages that are retrieved), and NDCG (Normalized Discounted Cumulative Gain). For generation, faithfulness measures whether claims in the answer are supported by retrieved context, answer relevancy measures topical alignment with the",
+        "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the",
+        "BM25 (Best Matching 25) is a probabilistic ranking function used in information retrieval. It is an improvement over the classic TF-IDF approach, incorporating document length normalization and term frequency saturation. BM25 scores documents based on the query terms appearing in each document, considering term frequency, inverse document frequency, and document length. Despite the rise of neural retrievers, BM25 remains competitive for many search tasks, especially for keyword-heavy queries and exact term"
+      ]
+    },
+    {
+      "question": "What are the different chunking strategies for RAG and how do they affect retrieval quality?",
+      "relevant_doc_ids": [
+        "doc_008"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_008",
+        "doc_002",
+        "doc_004"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_008",
+        "doc_005",
+        "doc_004"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_008"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_008"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": [],
+      "baseline_answer": "The different chunking strategies for RAG include:\n\n*   **Fixed-size chunking:** Splitting by character or token count with overlap.\n*   **Sentence-based chunking:** Splitting at sentence boundaries.\n*   **Paragraph-based chunking:** Using document structure.\n*   **Semantic chunking:** Grouping semantically similar sentences together.\n*   **Hierarchical chunking:** Maintaining parent-child relationships between chunks.\n*   **Agentic chunking:** Using an LLM to determine optimal split points.\n*   **Late chunking:** Embedding full documents first, then splitting.\n\nThe choice of chunking strategy significantly impacts retrieval quality. Regarding the effect on retrieval, smaller chunks provide more precise retrieval but may lack context, while larger chunks preserve context but may include irrelevant information.",
+      "updated_answer": "The choice of chunking strategy significantly impacts retrieval quality.\n\nCommon chunking strategies include:\n*   **Fixed-size chunking:** Splitting documents by character or token count, often with overlap.\n*   **Sentence-based chunking:** Splitting the document at sentence boundaries.\n*   **Paragraph-based chunking:** Utilizing the document's inherent structure.\n*   **Semantic chunking:** Grouping sentences that are semantically similar together.\n\nAdvanced strategies include:\n*   **Hierarchical chunking:** Maintaining parent-child relationships between chunks.\n*   **Agentic chunking:** Using a Large Language Model (LLM) to determine the optimal split points.\n*   **Late chunking:** Embedding full documents first, and then splitting them.\n\nRegarding the effect on retrieval quality, the context notes a general trade-off:\n*   **Smaller chunks** provide more precise retrieval but may lack context.\n*   **Larger chunks** preserve context but may include irrelevant information.",
+      "baseline_contexts": [
+        "Chunking is the process of splitting documents into smaller segments for indexing in a RAG system. The choice of chunking strategy significantly impacts retrieval quality. Common approaches include fixed-size chunking (splitting by character or token count with overlap), sentence-based chunking (splitting at sentence boundaries), paragraph-based chunking (using document structure), and semantic chunking (grouping semantically similar sentences together). Key parameters include chunk size (typically 256-1024",
+        "Key parameters include chunk size (typically 256-1024 tokens) and chunk overlap (typically 10-20% of chunk size). Smaller chunks provide more precise retrieval but may lack context; larger chunks preserve context but may include irrelevant information. Advanced strategies include hierarchical chunking (maintaining parent-child relationships between chunks), agentic chunking (using an LLM to determine optimal split points), and late chunking (embedding full documents first, then splitting). The optimal",
+        "Key challenges in RAG include retrieval quality, context window limitations, faithfulness of generated answers to retrieved context, and handling conflicting information across sources.",
+        "Evaluating RAG systems requires measuring both retrieval quality and generation quality. Common retrieval metrics include context precision (what fraction of retrieved documents are relevant), context recall (what fraction of relevant documents are retrieved), and Mean Reciprocal Rank (MRR). For generation quality, key metrics include faithfulness (whether the generated answer is supported by the retrieved context), answer relevancy (whether the answer addresses the question), and answer correctness"
+      ],
+      "updated_contexts": [
+        "Chunking is the process of splitting documents into smaller segments for indexing in a RAG system. The choice of chunking strategy significantly impacts retrieval quality. Common approaches include fixed-size chunking (splitting by character or token count with overlap), sentence-based chunking (splitting at sentence boundaries), paragraph-based chunking (using document structure), and semantic chunking (grouping semantically similar sentences together). Key parameters include chunk size (typically 256-1024",
+        "Key parameters include chunk size (typically 256-1024 tokens) and chunk overlap (typically 10-20% of chunk size). Smaller chunks provide more precise retrieval but may lack context; larger chunks preserve context but may include irrelevant information. Advanced strategies include hierarchical chunking (maintaining parent-child relationships between chunks), agentic chunking (using an LLM to determine optimal split points), and late chunking (embedding full documents first, then splitting). The optimal",
+        "BM25 (Best Matching 25) is a probabilistic ranking function used in information retrieval. It is an improvement over the classic TF-IDF approach, incorporating document length normalization and term frequency saturation. BM25 scores documents based on the query terms appearing in each document, considering term frequency, inverse document frequency, and document length. Despite the rise of neural retrievers, BM25 remains competitive for many search tasks, especially for keyword-heavy queries and exact term",
+        "Evaluating RAG systems requires measuring both retrieval quality and generation quality across multiple dimensions. For retrieval, the primary metrics are context precision (fraction of retrieved passages that are relevant), context recall (fraction of ground-truth relevant passages that are retrieved), and NDCG (Normalized Discounted Cumulative Gain). For generation, faithfulness measures whether claims in the answer are supported by retrieved context, answer relevancy measures topical alignment with the"
+      ]
+    },
+    {
+      "question": "What algorithms do vector databases use for similarity search?",
+      "relevant_doc_ids": [
+        "doc_003"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_003",
+        "doc_005",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_003",
+        "doc_005",
+        "doc_009"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_003"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_003"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 0.98,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 1.0,
+        "context_precision": 1.0,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.020000000000000018,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": [],
+      "baseline_answer": "Vector databases use approximate nearest neighbor (ANN) algorithms such as HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale.\n\nAdditionally, they find semantically similar items by computing distances using methods like cosine similarity, Euclidean distance, or dot product.",
+      "updated_answer": "Vector databases use approximate nearest neighbor (ANN) algorithms such as HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale.",
+      "baseline_contexts": [
+        "Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale. Unlike traditional databases that use exact matching, vector databases find items that are semantically similar by computing distances (cosine similarity, Euclidean distance, or dot product) between vector representations. Key features include support for metadata filtering, hybrid search (combining vector and keyword search), real-time indexing, and horizontal scaling. ChromaDB is an",
+        "Vector databases are specialized database systems designed to store, index, and query high-dimensional vector data efficiently. They are essential infrastructure for AI applications that rely on similarity search, such as recommendation systems, image retrieval, and RAG systems. Popular vector databases include Pinecone, Weaviate, Qdrant, Milvus, and ChromaDB. These databases use approximate nearest neighbor (ANN) algorithms like HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ",
+        "tasks, especially for keyword-heavy queries and exact term matching. Hybrid search combines BM25 (lexical search) with dense vector retrieval (semantic search) to leverage the strengths of both approaches. In hybrid search, scores from both methods are typically combined using reciprocal rank fusion (RRF) or linear interpolation. Cross-encoder re-ranking is often applied as a second stage: after retrieving candidates from both BM25 and vector search, a cross-encoder model scores each query-document pair",
+        "the language model, which generates an answer grounded in the retrieved information. The retrieval step typically uses dense vector representations (embeddings) of both the query and documents, computing similarity scores to find the most relevant passages. RAG systems can be categorized into naive RAG (simple retrieve-then-generate), advanced RAG (with query rewriting, re-ranking, and filtering), and modular RAG (with interchangeable components). Key challenges in RAG include retrieval quality, context"
+      ],
+      "updated_contexts": [
+        "Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale. Unlike traditional databases that use exact matching, vector databases find items that are semantically similar by computing distances (cosine similarity, Euclidean distance, or dot product) between vector representations. Key features include support for metadata filtering, hybrid search (combining vector and keyword search), real-time indexing, and horizontal scaling. ChromaDB is an",
+        "Vector databases are specialized database systems designed to store, index, and query high-dimensional vector data efficiently. They are essential infrastructure for AI applications that rely on similarity search, such as recommendation systems, image retrieval, and RAG systems. Popular vector databases include Pinecone, Weaviate, Qdrant, Milvus, and ChromaDB. These databases use approximate nearest neighbor (ANN) algorithms like HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ",
+        "tasks, especially for keyword-heavy queries and exact term matching. Hybrid search combines BM25 (lexical search) with dense vector retrieval (semantic search) to leverage the strengths of both approaches. In hybrid search, scores from both methods are typically combined using reciprocal rank fusion (RRF) or linear interpolation. Cross-encoder re-ranking is often applied as a second stage: after retrieving candidates from both BM25 and vector search, a cross-encoder model scores each query-document pair",
+        "vector search, keyword search, or structured queries based on query type; (3) Self-reflection - the agent checks whether retrieved context is sufficient before generating; (4) Tool use - the agent can call APIs, databases, or calculators as needed. Frameworks like LangGraph and CrewAI enable building agentic RAG systems with state management and multi-step reasoning. While agentic RAG improves answer quality for complex queries, it introduces challenges in latency (multiple LLM calls), cost, debugging"
+      ]
+    },
+    {
+      "question": "What is GraphRAG and how does it improve over standard vector-based RAG?",
+      "relevant_doc_ids": [
+        "doc_007"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_003",
+        "doc_006"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_003",
+        "doc_006"
+      ],
+      "baseline_matched_relevant_doc_ids": [],
+      "updated_matched_relevant_doc_ids": [],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": [],
+      "baseline_answer": "I don't have enough information to answer this.",
+      "updated_answer": "I don't have enough information to answer this.",
+      "baseline_contexts": [
+        "Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale. Unlike traditional databases that use exact matching, vector databases find items that are semantically similar by computing distances (cosine similarity, Euclidean distance, or dot product) between vector representations. Key features include support for metadata filtering, hybrid search (combining vector and keyword search), real-time indexing, and horizontal scaling. ChromaDB is an",
+        "Vector databases are specialized database systems designed to store, index, and query high-dimensional vector data efficiently. They are essential infrastructure for AI applications that rely on similarity search, such as recommendation systems, image retrieval, and RAG systems. Popular vector databases include Pinecone, Weaviate, Qdrant, Milvus, and ChromaDB. These databases use approximate nearest neighbor (ANN) algorithms like HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ",
+        "real-time indexing, and horizontal scaling. ChromaDB is an open-source embedding database that emphasizes simplicity and developer experience, supporting both in-memory and persistent storage modes.",
+        "alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit emergent capabilities such as in-context learning, chain-of-thought reasoning, and instruction following. Fine-tuning techniques include supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), and parameter-efficient methods like LoRA. Challenges include hallucination (generating plausible but incorrect information), context window limitations, computational costs, and safety concerns. The trend toward smaller, more efficient"
+      ],
+      "updated_contexts": [
+        "Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale. Unlike traditional databases that use exact matching, vector databases find items that are semantically similar by computing distances (cosine similarity, Euclidean distance, or dot product) between vector representations. Key features include support for metadata filtering, hybrid search (combining vector and keyword search), real-time indexing, and horizontal scaling. ChromaDB is an",
+        "Vector databases are specialized database systems designed to store, index, and query high-dimensional vector data efficiently. They are essential infrastructure for AI applications that rely on similarity search, such as recommendation systems, image retrieval, and RAG systems. Popular vector databases include Pinecone, Weaviate, Qdrant, Milvus, and ChromaDB. These databases use approximate nearest neighbor (ANN) algorithms like HNSW (Hierarchical Navigable Small World), IVF (Inverted File Index), and PQ",
+        "real-time indexing, and horizontal scaling. ChromaDB is an open-source embedding database that emphasizes simplicity and developer experience, supporting both in-memory and persistent storage modes.",
+        "alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit emergent capabilities such as in-context learning, chain-of-thought reasoning, and instruction following. Fine-tuning techniques include supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), and parameter-efficient methods like LoRA. Challenges include hallucination (generating plausible but incorrect information), context window limitations, computational costs, and safety concerns. The trend toward smaller, more efficient"
+      ]
+    },
+    {
+      "question": "What are the main challenges of large language models?",
+      "relevant_doc_ids": [
+        "doc_006"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_006",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_006",
+        "doc_002",
+        "doc_007"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_006"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_006"
+      ],
+      "baseline_scores": {
+        "faithfulness": 0.9,
+        "answer_relevancy": 0.95,
+        "context_precision": 0.85,
+        "context_recall": 0.8,
+        "answer_correctness": 0.65,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.8,
+        "context_precision": 0.6,
+        "context_recall": 0.3,
+        "answer_correctness": 0.5,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.09999999999999998,
+        "answer_relevancy": -0.1499999999999999,
+        "context_precision": -0.25,
+        "context_recall": -0.5,
+        "answer_correctness": -0.15000000000000002,
+        "retrieval_precision": -0.16666666666666669,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "degraded",
+      "degraded_metrics": [
+        "answer_relevancy",
+        "context_precision",
+        "context_recall",
+        "answer_correctness",
+        "retrieval_precision"
+      ],
+      "baseline_answer": "Based on the provided context, the challenges associated with large language models include:\n\n*   Safety concerns.\n*   Having static, potentially outdated knowledge.\n\nAdditionally, when using Retrieval-Augmented Generation (RAG) systems, key challenges include:\n\n*   Retrieval quality.\n*   Context window limitations.\n*   Faithfulness of generated answers to retrieved context.\n*   Handling conflicting information across sources.",
+      "updated_answer": "The main challenges mentioned are:\n\n1.  Safety concerns.\n2.  The limitation of LLMs having static, potentially outdated knowledge.\n\n(The context also mentions challenges related to Knowledge Graphs, including the cost of graph construction, maintaining graph quality, and scaling to large knowledge bases.)",
+      "baseline_contexts": [
+        "and safety concerns. The trend toward smaller, more efficient models (like Phi, Gemma) shows that capability can be achieved without extreme scale.",
+        "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the",
+        "Key challenges in RAG include retrieval quality, context window limitations, faithfulness of generated answers to retrieved context, and handling conflicting information across sources.",
+        "the language model, which generates an answer grounded in the retrieved information. The retrieval step typically uses dense vector representations (embeddings) of both the query and documents, computing similarity scores to find the most relevant passages. RAG systems can be categorized into naive RAG (simple retrieve-then-generate), advanced RAG (with query rewriting, re-ranking, and filtering), and modular RAG (with interchangeable components). Key challenges in RAG include retrieval quality, context"
+      ],
+      "updated_contexts": [
+        "and safety concerns. The trend toward smaller, more efficient models (like Phi, Gemma) shows that capability can be achieved without extreme scale.",
+        "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the",
+        "evidence. However, challenges include the cost of graph construction, maintaining graph quality, and scaling to large knowledge bases.",
+        "Large Language Models (LLMs) are neural networks trained on massive text corpora to understand and generate human language. Modern LLMs are based on the Transformer architecture and are typically trained using next-token prediction (autoregressive models like GPT) or masked language modeling (models like BERT). Key milestones include GPT-3 (175 billion parameters, 2020), ChatGPT (RLHF-trained GPT-3.5, 2022), GPT-4 (multimodal, 2023), and open-source alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit"
+      ]
+    },
+    {
+      "question": "How does RAGAS evaluate RAG systems?",
+      "relevant_doc_ids": [
+        "doc_004"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_004",
+        "doc_001"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_004",
+        "doc_001",
+        "doc_002"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_004"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_004"
+      ],
+      "baseline_scores": {
+        "faithfulness": 0.7,
+        "answer_relevancy": 0.85,
+        "context_precision": 0.75,
+        "context_recall": 0.9,
+        "answer_correctness": 0.8,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 0.6,
+        "answer_relevancy": 0.7,
+        "context_precision": 0.7,
+        "context_recall": 0.6,
+        "answer_correctness": 0.8,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": -0.09999999999999998,
+        "answer_relevancy": -0.15000000000000002,
+        "context_precision": -0.050000000000000044,
+        "context_recall": -0.30000000000000004,
+        "answer_correctness": 0.0,
+        "retrieval_precision": -0.16666666666666669,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "degraded",
+      "degraded_metrics": [
+        "answer_relevancy",
+        "context_recall",
+        "retrieval_precision"
+      ],
+      "baseline_answer": "The RAGAS framework provides automated evaluation using LLM-as-judge approaches, where a language model assesses certain qualities.",
+      "updated_answer": "The RAGAS framework has become the de facto standard for automated RAG evaluation, using LLM-as-judge methodology.",
+      "baseline_contexts": [
+        "the answer addresses the question), and answer correctness (whether the answer matches the ground truth). The RAGAS framework provides automated evaluation using LLM-as-judge approaches, where a language model assesses these qualities. Beyond automated metrics, human evaluation remains important for assessing aspects like fluency, completeness, and usefulness. A/B testing in production environments can measure real-world impact metrics such as user satisfaction and task completion rates. Regression testing",
+        "Evaluating RAG systems requires measuring both retrieval quality and generation quality. Common retrieval metrics include context precision (what fraction of retrieved documents are relevant), context recall (what fraction of relevant documents are retrieved), and Mean Reciprocal Rank (MRR). For generation quality, key metrics include faithfulness (whether the generated answer is supported by the retrieved context), answer relevancy (whether the answer addresses the question), and answer correctness",
+        "user satisfaction and task completion rates. Regression testing is crucial for monitoring quality over time, especially when updating knowledge bases or changing retrieval strategies.",
+        "attention runs multiple attention functions in parallel, allowing the model to attend to information from different representation subspaces. The Transformer has become the foundation for most modern NLP models, including BERT, GPT, and T5."
+      ],
+      "updated_contexts": [
+        "context, answer relevancy measures topical alignment with the question, and answer correctness compares against ground truth references. The RAGAS framework (2024-2026) has become the de facto standard for automated RAG evaluation, using LLM-as-judge methodology. Newer evaluation approaches include reference-free evaluation (no ground truth needed), component-level diagnostics (pinpointing whether failures come from retrieval, context selection, or generation), and adversarial testing (probing for",
+        "Evaluating RAG systems requires measuring both retrieval quality and generation quality across multiple dimensions. For retrieval, the primary metrics are context precision (fraction of retrieved passages that are relevant), context recall (fraction of ground-truth relevant passages that are retrieved), and NDCG (Normalized Discounted Cumulative Gain). For generation, faithfulness measures whether claims in the answer are supported by retrieved context, answer relevancy measures topical alignment with the",
+        "attention runs multiple attention functions in parallel, allowing the model to attend to information from different representation subspaces. The Transformer has become the foundation for most modern NLP models, including BERT, GPT, and T5.",
+        "the language model, which generates an answer grounded in the retrieved information. Modern RAG systems in 2025-2026 have evolved significantly: agentic RAG uses AI agents to dynamically decide retrieval strategies; corrective RAG (CRAG) adds a verification step to assess retrieval quality; and self-RAG enables the model to decide when retrieval is necessary. Key challenges include retrieval quality, faithfulness hallucination, conflicting information, and the cost-latency tradeoff of multi-stage"
+      ]
+    },
+    {
+      "question": "What is the difference between naive RAG and advanced RAG?",
+      "relevant_doc_ids": [
+        "doc_002"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_006",
+        "doc_002"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_006",
+        "doc_002",
+        "doc_004"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_002"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_002"
+      ],
+      "baseline_scores": {
+        "faithfulness": 0.1,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.1,
+        "context_precision": 0.1,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.3333333333333333,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": -0.1,
+        "answer_relevancy": 0.1,
+        "context_precision": 0.1,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": -0.16666666666666669,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "degraded",
+      "degraded_metrics": [
+        "retrieval_precision"
+      ],
+      "baseline_answer": "I don't have enough information to answer this.",
+      "updated_answer": "I don't have enough information to answer this.",
+      "baseline_contexts": [
+        "alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit emergent capabilities such as in-context learning, chain-of-thought reasoning, and instruction following. Fine-tuning techniques include supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), and parameter-efficient methods like LoRA. Challenges include hallucination (generating plausible but incorrect information), context window limitations, computational costs, and safety concerns. The trend toward smaller, more efficient",
+        "Large Language Models (LLMs) are neural networks trained on massive text corpora to understand and generate human language. Modern LLMs are based on the Transformer architecture and are typically trained using next-token prediction (autoregressive models like GPT) or masked language modeling (models like BERT). Key milestones include GPT-3 (175 billion parameters, 2020), ChatGPT (RLHF-trained GPT-3.5, 2022), GPT-4 (multimodal, 2023), and open-source alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit",
+        "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the",
+        "Key challenges in RAG include retrieval quality, context window limitations, faithfulness of generated answers to retrieved context, and handling conflicting information across sources."
+      ],
+      "updated_contexts": [
+        "alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit emergent capabilities such as in-context learning, chain-of-thought reasoning, and instruction following. Fine-tuning techniques include supervised fine-tuning (SFT), reinforcement learning from human feedback (RLHF), and parameter-efficient methods like LoRA. Challenges include hallucination (generating plausible but incorrect information), context window limitations, computational costs, and safety concerns. The trend toward smaller, more efficient",
+        "Large Language Models (LLMs) are neural networks trained on massive text corpora to understand and generate human language. Modern LLMs are based on the Transformer architecture and are typically trained using next-token prediction (autoregressive models like GPT) or masked language modeling (models like BERT). Key milestones include GPT-3 (175 billion parameters, 2020), ChatGPT (RLHF-trained GPT-3.5, 2022), GPT-4 (multimodal, 2023), and open-source alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit",
+        "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the",
+        "Evaluating RAG systems requires measuring both retrieval quality and generation quality across multiple dimensions. For retrieval, the primary metrics are context precision (fraction of retrieved passages that are relevant), context recall (fraction of ground-truth relevant passages that are retrieved), and NDCG (Normalized Discounted Cumulative Gain). For generation, faithfulness measures whether claims in the answer are supported by retrieved context, answer relevancy measures topical alignment with the"
+      ]
+    },
+    {
+      "question": "How does multi-head attention work in Transformers?",
+      "relevant_doc_ids": [
+        "doc_001"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_001",
+        "doc_006"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_001",
+        "doc_006"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_001"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_001"
+      ],
+      "baseline_scores": {
+        "faithfulness": 0.95,
+        "answer_relevancy": 0.95,
+        "context_precision": 0.95,
+        "context_recall": 0.9,
+        "answer_correctness": 0.9,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 0.95,
+        "answer_relevancy": 0.95,
+        "context_precision": 0.95,
+        "context_recall": 0.9,
+        "answer_correctness": 0.9,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": [],
+      "baseline_answer": "Multi-head attention runs multiple attention functions in parallel, which allows the model to attend to information from different representation subspaces.",
+      "updated_answer": "Multi-head attention runs multiple attention functions in parallel, which allows the model to attend to information from different representation subspaces.",
+      "baseline_contexts": [
+        "attention runs multiple attention functions in parallel, allowing the model to attend to information from different representation subspaces. The Transformer has become the foundation for most modern NLP models, including BERT, GPT, and T5.",
+        "and a position-wise fully connected feed-forward network. The decoder has an additional cross-attention sub-layer. Transformers use positional encoding to inject information about the position of tokens in the sequence, since the architecture itself has no inherent notion of order. The self-attention mechanism computes attention scores between all pairs of positions, allowing the model to capture long-range dependencies efficiently. Multi-head attention runs multiple attention functions in parallel,",
+        "The Transformer is a deep learning architecture introduced in the paper \"Attention Is All You Need\" by Vaswani et al. in 2017. Unlike recurrent neural networks (RNNs), Transformers process all positions in a sequence simultaneously using a mechanism called self-attention. The architecture consists of an encoder and a decoder, each made up of multiple layers. Each layer in the encoder has two sub-layers: a multi-head self-attention mechanism and a position-wise fully connected feed-forward network. The",
+        "Large Language Models (LLMs) are neural networks trained on massive text corpora to understand and generate human language. Modern LLMs are based on the Transformer architecture and are typically trained using next-token prediction (autoregressive models like GPT) or masked language modeling (models like BERT). Key milestones include GPT-3 (175 billion parameters, 2020), ChatGPT (RLHF-trained GPT-3.5, 2022), GPT-4 (multimodal, 2023), and open-source alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit"
+      ],
+      "updated_contexts": [
+        "attention runs multiple attention functions in parallel, allowing the model to attend to information from different representation subspaces. The Transformer has become the foundation for most modern NLP models, including BERT, GPT, and T5.",
+        "and a position-wise fully connected feed-forward network. The decoder has an additional cross-attention sub-layer. Transformers use positional encoding to inject information about the position of tokens in the sequence, since the architecture itself has no inherent notion of order. The self-attention mechanism computes attention scores between all pairs of positions, allowing the model to capture long-range dependencies efficiently. Multi-head attention runs multiple attention functions in parallel,",
+        "The Transformer is a deep learning architecture introduced in the paper \"Attention Is All You Need\" by Vaswani et al. in 2017. Unlike recurrent neural networks (RNNs), Transformers process all positions in a sequence simultaneously using a mechanism called self-attention. The architecture consists of an encoder and a decoder, each made up of multiple layers. Each layer in the encoder has two sub-layers: a multi-head self-attention mechanism and a position-wise fully connected feed-forward network. The",
+        "Large Language Models (LLMs) are neural networks trained on massive text corpora to understand and generate human language. Modern LLMs are based on the Transformer architecture and are typically trained using next-token prediction (autoregressive models like GPT) or masked language modeling (models like BERT). Key milestones include GPT-3 (175 billion parameters, 2020), ChatGPT (RLHF-trained GPT-3.5, 2022), GPT-4 (multimodal, 2023), and open-source alternatives like LLaMA, Mistral, and Qwen. LLMs exhibit"
+      ]
+    },
+    {
+      "question": "What is reciprocal rank fusion in hybrid search?",
+      "relevant_doc_ids": [
+        "doc_005"
+      ],
+      "baseline_retrieved_doc_ids": [
+        "doc_005",
+        "doc_003"
+      ],
+      "updated_retrieved_doc_ids": [
+        "doc_005",
+        "doc_003"
+      ],
+      "baseline_matched_relevant_doc_ids": [
+        "doc_005"
+      ],
+      "updated_matched_relevant_doc_ids": [
+        "doc_005"
+      ],
+      "baseline_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9,
+        "context_precision": 0.9,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "updated_scores": {
+        "faithfulness": 1.0,
+        "answer_relevancy": 0.9,
+        "context_precision": 0.9,
+        "context_recall": 1.0,
+        "answer_correctness": 1.0,
+        "retrieval_precision": 0.5,
+        "retrieval_recall": 1.0,
+        "retrieval_hit": 1.0
+      },
+      "diff": {
+        "faithfulness": 0.0,
+        "answer_relevancy": 0.0,
+        "context_precision": 0.0,
+        "context_recall": 0.0,
+        "answer_correctness": 0.0,
+        "retrieval_precision": 0.0,
+        "retrieval_recall": 0.0,
+        "retrieval_hit": 0.0
+      },
+      "status": "stable",
+      "degraded_metrics": [],
+      "baseline_answer": "In hybrid search, scores from both BM25 and dense vector retrieval are typically combined using reciprocal rank fusion (RRF) or linear interpolation.",
+      "updated_answer": "In hybrid search, scores from both BM25 and dense vector retrieval are typically combined using reciprocal rank fusion (RRF) or linear interpolation.",
+      "baseline_contexts": [
+        "tasks, especially for keyword-heavy queries and exact term matching. Hybrid search combines BM25 (lexical search) with dense vector retrieval (semantic search) to leverage the strengths of both approaches. In hybrid search, scores from both methods are typically combined using reciprocal rank fusion (RRF) or linear interpolation. Cross-encoder re-ranking is often applied as a second stage: after retrieving candidates from both BM25 and vector search, a cross-encoder model scores each query-document pair",
+        "Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale. Unlike traditional databases that use exact matching, vector databases find items that are semantically similar by computing distances (cosine similarity, Euclidean distance, or dot product) between vector representations. Key features include support for metadata filtering, hybrid search (combining vector and keyword search), real-time indexing, and horizontal scaling. ChromaDB is an",
+        "search, a cross-encoder model scores each query-document pair more carefully to produce a final ranking. This two-stage approach (retrieve then re-rank) achieves better results than either method alone while remaining computationally feasible.",
+        "BM25 (Best Matching 25) is a probabilistic ranking function used in information retrieval. It is an improvement over the classic TF-IDF approach, incorporating document length normalization and term frequency saturation. BM25 scores documents based on the query terms appearing in each document, considering term frequency, inverse document frequency, and document length. Despite the rise of neural retrievers, BM25 remains competitive for many search tasks, especially for keyword-heavy queries and exact term"
+      ],
+      "updated_contexts": [
+        "tasks, especially for keyword-heavy queries and exact term matching. Hybrid search combines BM25 (lexical search) with dense vector retrieval (semantic search) to leverage the strengths of both approaches. In hybrid search, scores from both methods are typically combined using reciprocal rank fusion (RRF) or linear interpolation. Cross-encoder re-ranking is often applied as a second stage: after retrieving candidates from both BM25 and vector search, a cross-encoder model scores each query-document pair",
+        "Navigable Small World), IVF (Inverted File Index), and PQ (Product Quantization) to enable fast similarity search at scale. Unlike traditional databases that use exact matching, vector databases find items that are semantically similar by computing distances (cosine similarity, Euclidean distance, or dot product) between vector representations. Key features include support for metadata filtering, hybrid search (combining vector and keyword search), real-time indexing, and horizontal scaling. ChromaDB is an",
+        "search, a cross-encoder model scores each query-document pair more carefully to produce a final ranking. This two-stage approach (retrieve then re-rank) achieves better results than either method alone while remaining computationally feasible.",
+        "BM25 (Best Matching 25) is a probabilistic ranking function used in information retrieval. It is an improvement over the classic TF-IDF approach, incorporating document length normalization and term frequency saturation. BM25 scores documents based on the query terms appearing in each document, considering term frequency, inverse document frequency, and document length. Despite the rise of neural retrievers, BM25 remains competitive for many search tasks, especially for keyword-heavy queries and exact term"
+      ]
+    }
+  ],
+  "knowledge_base_diff": {
+    "added": [
+      {
+        "id": "doc_009",
+        "title": "Agentic RAG and Multi-Step Retrieval",
+        "content": "Agentic RAG represents the evolution of RAG systems from static pipelines to dynamic, agent-driven workflows. In agentic RAG, an AI agent orchestrates the retrieval process by analyzing the query, planning retrieval steps, executing searches across multiple sources, evaluating results, and iterating if needed. Key patterns include: (1) Query decomposition - breaking complex questions into sub-queries; (2) Adaptive retrieval - choosing between vector search, keyword search, or structured queries based on query type; (3) Self-reflection - the agent checks whether retrieved context is sufficient before generating; (4) Tool use - the agent can call APIs, databases, or calculators as needed. Frameworks like LangGraph and CrewAI enable building agentic RAG systems with state management and multi-step reasoning. While agentic RAG improves answer quality for complex queries, it introduces challenges in latency (multiple LLM calls), cost, debugging complexity, and evaluation (non-deterministic agent paths make regression testing harder)."
+      }
+    ],
+    "removed": [],
+    "modified": [
+      {
+        "id": "doc_002",
+        "title_before": "Retrieval-Augmented Generation",
+        "title_after": "Retrieval-Augmented Generation",
+        "content_before": "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the retrieved information. The retrieval step typically uses dense vector representations (embeddings) of both the query and documents, computing similarity scores to find the most relevant passages. RAG systems can be categorized into naive RAG (simple retrieve-then-generate), advanced RAG (with query rewriting, re-ranking, and filtering), and modular RAG (with interchangeable components). Key challenges in RAG include retrieval quality, context window limitations, faithfulness of generated answers to retrieved context, and handling conflicting information across sources.",
+        "content_after": "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by combining them with external knowledge retrieval. First introduced by Lewis et al. in 2020, RAG addresses the limitation of LLMs having static, potentially outdated knowledge. In a RAG system, when a query is received, a retriever component searches a knowledge base to find relevant documents. These retrieved documents are then provided as context to the language model, which generates an answer grounded in the retrieved information. Modern RAG systems in 2025-2026 have evolved significantly: agentic RAG uses AI agents to dynamically decide retrieval strategies; corrective RAG (CRAG) adds a verification step to assess retrieval quality; and self-RAG enables the model to decide when retrieval is necessary. Key challenges include retrieval quality, faithfulness hallucination, conflicting information, and the cost-latency tradeoff of multi-stage pipelines. The field is moving from simple retrieve-and-generate toward complex orchestration systems with query routing, adaptive retrieval, and built-in evaluation loops.",
+        "title_changed": false,
+        "content_changed": true
+      },
+      {
+        "id": "doc_004",
+        "title_before": "Evaluation Metrics for RAG Systems",
+        "title_after": "Evaluation Metrics for RAG Systems",
+        "content_before": "Evaluating RAG systems requires measuring both retrieval quality and generation quality. Common retrieval metrics include context precision (what fraction of retrieved documents are relevant), context recall (what fraction of relevant documents are retrieved), and Mean Reciprocal Rank (MRR). For generation quality, key metrics include faithfulness (whether the generated answer is supported by the retrieved context), answer relevancy (whether the answer addresses the question), and answer correctness (whether the answer matches the ground truth). The RAGAS framework provides automated evaluation using LLM-as-judge approaches, where a language model assesses these qualities. Beyond automated metrics, human evaluation remains important for assessing aspects like fluency, completeness, and usefulness. A/B testing in production environments can measure real-world impact metrics such as user satisfaction and task completion rates. Regression testing is crucial for monitoring quality over time, especially when updating knowledge bases or changing retrieval strategies.",
+        "content_after": "Evaluating RAG systems requires measuring both retrieval quality and generation quality across multiple dimensions. For retrieval, the primary metrics are context precision (fraction of retrieved passages that are relevant), context recall (fraction of ground-truth relevant passages that are retrieved), and NDCG (Normalized Discounted Cumulative Gain). For generation, faithfulness measures whether claims in the answer are supported by retrieved context, answer relevancy measures topical alignment with the question, and answer correctness compares against ground truth references. The RAGAS framework (2024-2026) has become the de facto standard for automated RAG evaluation, using LLM-as-judge methodology. Newer evaluation approaches include reference-free evaluation (no ground truth needed), component-level diagnostics (pinpointing whether failures come from retrieval, context selection, or generation), and adversarial testing (probing for hallucination under edge cases). Production monitoring should track metric drift over time, with automated regression tests triggered on knowledge base updates or pipeline configuration changes.",
+        "title_changed": false,
+        "content_changed": true
+      }
+    ],
+    "unchanged_count": 6,
+    "summary_text": "Knowledge base delta: 1 document(s) added, 2 updated, 6 unchanged."
+  }
+}

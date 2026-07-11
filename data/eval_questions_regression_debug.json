@@ -1,0 +1,32 @@
+[
+  {
+    "question": "What is agentic RAG and how is it different from a static retrieve-then-generate pipeline?",
+    "ground_truth": "Agentic RAG uses an AI agent to plan and adapt retrieval, such as decomposing queries, choosing tools or retrieval strategies, and iterating when evidence is insufficient. A static retrieve-then-generate pipeline follows a fixed retrieval step and then generates an answer without dynamic orchestration.",
+    "relevant_doc_ids": [
+      "doc_009",
+      "doc_002"
+    ]
+  },
+  {
+    "question": "What is corrective RAG (CRAG) and what problem does it address?",
+    "ground_truth": "Corrective RAG adds a verification or correction stage that checks whether retrieved documents are good enough before generation. It addresses poor retrieval quality by filtering, revising, or supplementing retrieved context.",
+    "relevant_doc_ids": [
+      "doc_002"
+    ]
+  },
+  {
+    "question": "What is NDCG and why is it useful for evaluating retrieval in RAG?",
+    "ground_truth": "NDCG, or Normalized Discounted Cumulative Gain, measures ranking quality by rewarding relevant results that appear higher in the ranked list. In RAG it is useful because it captures not just whether relevant passages were retrieved, but whether they were ranked near the top where generation is most likely to use them.",
+    "relevant_doc_ids": [
+      "doc_004"
+    ]
+  },
+  {
+    "question": "Why is regression testing harder for agentic RAG than for static RAG?",
+    "ground_truth": "Regression testing is harder for agentic RAG because the retrieval path can be adaptive and non-deterministic: the agent may decompose the query, choose different tools, or iterate a different number of times. That makes failures harder to reproduce and attribute, so regression testing should track metric drift and behavior over time.",
+    "relevant_doc_ids": [
+      "doc_009",
+      "doc_004"
+    ]
+  }
+]

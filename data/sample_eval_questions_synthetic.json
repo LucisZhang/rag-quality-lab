@@ -1,0 +1,17 @@
+[
+  {
+    "question": "SYNTHETIC SAMPLE - How long is the warranty on Model-A widgets?",
+    "ground_truth": "THIS IS A SYNTHETIC RECORD, NOT REAL EVAL DATA. Model-A widgets carry a 24-month warranty covering coil and frame defects, with calibration drift covered for 6 months.",
+    "relevant_doc_ids": []
+  },
+  {
+    "question": "SYNTHETIC SAMPLE - What changed in Model-B widgets?",
+    "ground_truth": "THIS IS A SYNTHETIC RECORD, NOT REAL EVAL DATA. Model-B adds a self-calibration loop and a sealed coil housing, and the plant ledger schema gains a firmware_version field.",
+    "relevant_doc_ids": []
+  },
+  {
+    "question": "SYNTHETIC SAMPLE - How fast is expedited shipping in Northland?",
+    "ground_truth": "THIS IS A SYNTHETIC RECORD, NOT REAL EVAL DATA. Expedited shipping takes 2 business days.",
+    "relevant_doc_ids": []
+  }
+]

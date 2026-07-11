@@ -1,0 +1,75 @@
+{
+  "generated_at_utc": "2026-07-11T03:01:14Z",
+  "generator": "session one-off (node) 2026-07-11; regenerate/verify with scripts/verify_data.py",
+  "files": [
+    {
+      "path": "data/knowledge_base_v1.json",
+      "description": "Small controlled KB, version 1 (authored in prepare_data.py)",
+      "in_git": true,
+      "records": 8,
+      "bytes": 9433,
+      "sha256": "077e4fe16e4d4de08e1feacd68ca7442645787131b0b421e3e82db283b40ae18"
+    },
+    {
+      "path": "data/knowledge_base_v2.json",
+      "description": "Small controlled KB, version 2 - simulated update (authored in prepare_data.py)",
+      "in_git": true,
+      "records": 9,
+      "bytes": 10684,
+      "sha256": "0637f05cebf132a64c1f074828b0b4cfe734a97f357a54b6c1a60057afacc00b"
+    },
+    {
+      "path": "data/eval_questions.json",
+      "description": "12-question controlled eval set (authored in prepare_data.py)",
+      "in_git": true,
+      "records": 12,
+      "bytes": 5073,
+      "sha256": "b131e454468f1e77404bcf57f0529d22a0d6f4cd17a109432444c24249fab85c"
+    },
+    {
+      "path": "data/eval_questions_regression_debug.json",
+      "description": "4-question debug subset targeting V2-changed docs",
+      "in_git": true,
+      "records": 4,
+      "bytes": 1912,
+      "sha256": "1706d10d56baadd1bc5ab956bfc3a6b42f77a08e33bffb23123e4f2272aafde0"
+    },
+    {
+      "path": "data/large_eval_questions.json",
+      "description": "500-question large eval set (derived from MS MARCO v2.1 validation split via scale_up_dataset.py) - kept OUT of git for public-release licensing hygiene",
+      "in_git": false,
+      "records": 500,
+      "bytes": null,
+      "bytes_note": "72,982 bytes for the 2026-07 private-copy file; public clones regenerate locally instead of receiving the MS MARCO-derived queries",
+      "sha256": null,
+      "sha256_note": "private-copy sha256 was 106296c97bfb43e98718f94c14c30f8219aacf4cd291b7d81a5fc4c49b1cb72b before public-release removal; recompute after local regeneration if needed"
+    },
+    {
+      "path": "data/sample_knowledge_base_synthetic.json",
+      "description": "SYNTHETIC schema sample standing in for large_knowledge_base.json records",
+      "in_git": true,
+      "records": 5,
+      "bytes": 2112,
+      "sha256": "c34447659b005ab345dba88539e640c1da52b43ab480ac06d97aeec6f573f787"
+    },
+    {
+      "path": "data/sample_eval_questions_synthetic.json",
+      "description": "SYNTHETIC schema sample for eval question records",
+      "in_git": true,
+      "records": 3,
+      "bytes": 847,
+      "sha256": "f5699c3e58c2a32803604efb406458f9521aa6fc47853a546076c092474ead92"
+    },
+    {
+      "path": "data/large_knowledge_base.json",
+      "description": "Full 191 MB corpus (derived from MS MARCO v2.1 train split via scale_up_dataset.py) - kept OUT of git (GitHub 100 MB limit)",
+      "in_git": false,
+      "records": 498725,
+      "records_note": "counted 2026-07-09 from the read-only source folder; re-verify wherever the file exists via scripts/verify_data.py",
+      "bytes": null,
+      "bytes_note": "~191 MB measured 2026-07-09; exact bytes to be recorded with the sha256",
+      "sha256": null,
+      "sha256_note": "file not reachable from this session; compute at Track C0 workstation intake (or any machine holding the file) via scripts/verify_data.py and record here"
+    }
+  ]
+}
