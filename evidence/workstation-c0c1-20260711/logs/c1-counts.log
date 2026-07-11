@@ -1,0 +1,8 @@
+=== file counts ===
+confluence files: 5189
+jira files: 6120
+questions lines: 500 questions.jsonl
+=== question type counts ===
+total 500
+{'basic': 175, 'semantic': 125, 'intra_document_reasoning': 40, 'project_related': 40, 'constrained': 30, 'conflicting_info': 20, 'completeness': 20, 'miscellaneous': 20, 'high_level': 10, 'info_not_found': 20}
+answerable within S1 subset: 130

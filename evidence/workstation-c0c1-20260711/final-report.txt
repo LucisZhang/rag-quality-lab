@@ -1,0 +1,108 @@
+RAG Quality Lab - C0/C1 Final Report
+Workstation run timestamp: 2026-07-11T15:21:05Z
+Evidence tarball: /Users/hsiangkuochang/Downloads/rag-c0c1-evidence-20260711.tgz
+Evidence sha256: 045abdb4bb510ad5956093187bdbe42c159fce24368f412b773679eb971539cf
+Evidence size: 31,645 bytes
+
+Run Status
+Steps 1-5: PASS
+STEP 6: BLOCKED
+STEP 7: SKIPPED/BLOCKED
+STEP 8: SKIPPED
+STEP 9: PASS
+STEP 10: PASS
+STEP 11-FALLBACK: PASS
+STEP 12: PASS
+
+STEP Details
+Steps 1-5 passed:
+- GPU visibility and PyTorch CUDA checks passed after restarting Codex with GPU-visible execution.
+- Public repo clone path worked.
+- Python dependency install completed without replacing torch.
+- CI-equivalent checks passed:
+  - Ruff clean
+  - 44 tests passed
+  - verify_data passed
+  - deterministic A3 passed
+
+STEP 6 blocked:
+- Current Ollama build is incompatible with the workstation NVIDIA driver.
+- Host driver: 470.
+- Ollama reported it requires a newer driver and selected CPU with 0 B VRAM.
+- Ollama server did not remain running; port 11434 was not usable.
+- Accidental shared-home files were created by Ollama and then quarantined:
+  - /home/luban/.ollama/id_ed25519
+  - /home/luban/.ollama/id_ed25519.pub
+- Quarantine path:
+  /nfs/dataset-ofs-algo/zhangxiangguo/quarantine/home-luban-ollama-20260711-230626
+
+STEP 7 skipped/blocked:
+- Original fresh judged A3 re-run depends on Ollama.
+- It was not run because STEP 6 did not pass.
+
+STEP 8 skipped:
+- Large MS MARCO-derived KB regeneration was not run.
+
+STEP 9 passed:
+- EnterpriseRAG-Bench S1 subset was downloaded.
+- Scope: confluence + jira slices, questions.jsonl, extra_questions.jsonl.
+- Full all_documents.zip / full 500K corpus was not downloaded.
+
+STEP 10 passed:
+- EnterpriseRAG-Bench S1 files were extracted and counted.
+- Confluence files: 5,189
+- Jira files: 6,120
+- Questions: 500
+- S1-answerable question pool: 130
+
+STEP 11-FALLBACK passed:
+- Original Ollama embedding smoke was replaced by a human-approved PyTorch/HF CUDA fallback.
+- Model: BAAI/bge-base-en-v1.5
+- GPU: NVIDIA RTX A6000
+- Seconds per 1K docs: 15.73
+- Peak CUDA memory: 1.011 GB
+- Note: this is not apples-to-apples with the Mac nomic-embed-text/Ollama baseline. It is a PyTorch CUDA fallback smoke proving GPU-backed embedding execution works.
+
+STEP 12 passed:
+- Evidence tarball was created.
+- git status in the workstation clone showed modified evidence/verified-2026-07/deterministic-checks.json from STEP 5.
+
+Dataset Evidence
+- Dataset: EnterpriseRAG-Bench
+- Scope: S1 subset only
+- Confluence files: 5,189
+- Jira files: 6,120
+- Questions: 500
+- S1-answerable pool: 130
+- Provenance and SHA256SUMS are included in the tarball.
+
+Ollama Status
+- Blocked on this workstation due to runtime/driver compatibility.
+- No usable Ollama server was left running.
+- No fresh Ollama-judged A3 run was completed.
+- Accidental key files were quarantined and excluded from the evidence tarball.
+
+Hard Stops
+- STEP 6 Ollama runtime incompatibility triggered a hard stop.
+- Human approved a bounded fallback after cleanup.
+- No API keys were entered.
+- No paid API calls were made.
+- No full 500K corpus was downloaded.
+- No git commits or pushes were made from the workstation.
+- No public deployment was performed.
+
+Evidence Bundle Contents
+- logs/
+- repos/rag-quality-lab/evidence/verified-2026-07/
+- data/enterpriserag-bench/v1.0.0/SHA256SUMS.workstation-20260711.txt
+- data/enterpriserag-bench/v1.0.0/PROVENANCE.txt
+- data/enterpriserag-bench/v1.0.0/embed_smoke_result.json
+
+Interpretation
+This is a partial but useful C0/C1 evidence run:
+- Confirmed: workstation GPU/PyTorch path works.
+- Confirmed: public repo clone + CI-equivalent checks work.
+- Confirmed: EnterpriseRAG-Bench S1 acquisition, provenance, extraction, and counts work.
+- Confirmed: PyTorch/HF CUDA embedding smoke works.
+- Not completed: fresh Ollama-judged A3 re-run.
+- Blocker to record: current Ollama runtime is incompatible with the workstation's NVIDIA driver 470 and wrote shared-home key material before cleanup.
