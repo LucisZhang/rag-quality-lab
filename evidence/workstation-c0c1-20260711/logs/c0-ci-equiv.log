@@ -1,0 +1,55 @@
+All checks passed!
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-8.4.1, pluggy-1.6.0
+rootdir: /nfs/dataset-ofs-algo/zhangxiangguo/repos/rag-quality-lab
+configfile: pyproject.toml
+testpaths: tests
+plugins: anyio-4.13.0, langsmith-0.3.45
+collected 44 items
+
+tests/test_chunking.py .......                                           [ 15%]
+tests/test_evaluation_engine.py .............                            [ 45%]
+tests/test_hybrid_retrieval.py ........                                  [ 63%]
+tests/test_regression_diffing.py ................                        [100%]
+
+======================== 44 passed in 173.99s (0:02:53) ========================
+OK    data/knowledge_base_v1.json: records=8 bytes=9433 sha256 match
+OK    data/knowledge_base_v2.json: records=9 bytes=10684 sha256 match
+OK    data/eval_questions.json: records=12 bytes=5073 sha256 match
+OK    data/eval_questions_regression_debug.json: records=4 bytes=1912 sha256 match
+SKIP  data/large_eval_questions.json: absent by design (out-of-git corpus)
+OK    data/sample_knowledge_base_synthetic.json: records=5 bytes=2112 sha256 match
+OK    data/sample_eval_questions_synthetic.json: records=3 bytes=847 sha256 match
+SKIP  data/large_knowledge_base.json: absent by design (out-of-git corpus)
+
+All present data files match data/MANIFEST.json.
+{
+  "checked_at_utc": "2026-07-11T14:36:17Z",
+  "data_counts": {
+    "knowledge_base_v1": 8,
+    "knowledge_base_v2": 9,
+    "eval_questions": 12,
+    "large_eval_questions": null,
+    "large_eval_questions_present": false,
+    "large_eval_questions_note": "absent by design in public clones; regenerate from MS MARCO with scale_up_dataset.py",
+    "large_knowledge_base_present": false
+  },
+  "eval_dataset_valid": 12,
+  "saved_metrics": {
+    "comparison_pipeline_a_mean": 0.8093333333333332,
+    "comparison_pipeline_b_mean": 0.9438333333333333,
+    "comparison_relative_lift": 0.16618616144975298,
+    "regression_degraded": 4,
+    "regression_improved": 0,
+    "regression_stable": 8
+  },
+  "saved_scale_artifacts": {
+    "indexing_rows": 4,
+    "latency_rows": 2,
+    "max_documents_indexed": 50000
+  },
+  "ollama": {
+    "ok": false,
+    "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+  }
+}

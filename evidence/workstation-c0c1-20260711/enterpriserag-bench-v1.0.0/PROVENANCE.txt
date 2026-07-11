@@ -1,0 +1,14 @@
+Dataset: EnterpriseRAG-Bench
+Source repo/release: https://github.com/onyx-dot-app/EnterpriseRAG-Bench/releases/tag/v1.0.0
+Downloaded at UTC: 2026-07-11T15:12:05Z
+Scope: S1 only, confluence + jira slices plus questions.jsonl and extra_questions.jsonl
+Files:
+- https://github.com/onyx-dot-app/EnterpriseRAG-Bench/releases/download/v1.0.0/confluence_slice_0001.zip
+- https://github.com/onyx-dot-app/EnterpriseRAG-Bench/releases/download/v1.0.0/confluence_slice_0002.zip
+- https://github.com/onyx-dot-app/EnterpriseRAG-Bench/releases/download/v1.0.0/jira_slice_0001.zip
+- https://github.com/onyx-dot-app/EnterpriseRAG-Bench/releases/download/v1.0.0/jira_slice_0002.zip
+- https://github.com/onyx-dot-app/EnterpriseRAG-Bench/releases/download/v1.0.0/questions.jsonl
+- https://github.com/onyx-dot-app/EnterpriseRAG-Bench/releases/download/v1.0.0/extra_questions.jsonl
+License: MIT, verified 2026-07-11 on GitHub LICENSE and Hugging Face dataset card
+Corpus note: synthetic enterprise corpus, LLM-generated Redwood Inference simulation
+Full corpus all_documents.zip: NOT downloaded

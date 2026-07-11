@@ -79,8 +79,11 @@ This repo distinguishes two kinds of claims, and every results table below carri
 - **LLM-judged quality metrics** (faithfulness, relevancy, precision, recall, correctness):
   produced in the **saved 2026-04 runs** with a local `gemma4:e4b` judge, and **re-parsed —
   not re-judged — in 2026-07**. A fresh judged re-run is scheduled as the first workstation
-  intake job (Track C0). Judged absolute scores from a small local judge should be read as
-  relative signals between pipelines/versions, not calibrated absolutes.
+  intake job (Track C0). A 2026-07-11 workstation C0/C1 run proved the public clone, CI,
+  EnterpriseRAG-Bench S1 data path, and a PyTorch/HF CUDA embedding smoke, but the fresh
+  Ollama-judged A3 re-run remains blocked by Ollama/driver compatibility; see
+  `evidence/workstation-c0c1-20260711/`. Judged absolute scores from a small local judge should
+  be read as relative signals between pipelines/versions, not calibrated absolutes.
 
 Dataset provenance, licensing status, and integrity checksums live in [`DATA.md`](DATA.md)
 and `data/MANIFEST.json`.

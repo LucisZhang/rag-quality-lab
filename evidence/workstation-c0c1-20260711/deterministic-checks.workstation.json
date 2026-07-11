@@ -1,0 +1,30 @@
+{
+  "checked_at_utc": "2026-07-11T14:36:17Z",
+  "data_counts": {
+    "knowledge_base_v1": 8,
+    "knowledge_base_v2": 9,
+    "eval_questions": 12,
+    "large_eval_questions": null,
+    "large_eval_questions_present": false,
+    "large_eval_questions_note": "absent by design in public clones; regenerate from MS MARCO with scale_up_dataset.py",
+    "large_knowledge_base_present": false
+  },
+  "eval_dataset_valid": 12,
+  "saved_metrics": {
+    "comparison_pipeline_a_mean": 0.8093333333333332,
+    "comparison_pipeline_b_mean": 0.9438333333333333,
+    "comparison_relative_lift": 0.16618616144975298,
+    "regression_degraded": 4,
+    "regression_improved": 0,
+    "regression_stable": 8
+  },
+  "saved_scale_artifacts": {
+    "indexing_rows": 4,
+    "latency_rows": 2,
+    "max_documents_indexed": 50000
+  },
+  "ollama": {
+    "ok": false,
+    "error": "URLError: <urlopen error [Errno 111] Connection refused>"
+  }
+}
