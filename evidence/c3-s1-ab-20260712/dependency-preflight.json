@@ -1,0 +1,50 @@
+{
+  "checked_at_utc": "2026-07-12T05:38:01Z",
+  "status": "blocked",
+  "scope": "full EnterpriseRAG-Bench S1 retrieval A/B, 130 questions",
+  "interpreter": {
+    "path": ".venv/bin/python",
+    "python": "3.11.15",
+    "platform": "macOS-26.5.2-arm64-arm-64bit"
+  },
+  "python_modules": {
+    "available": {
+      "numpy": "1.26.4",
+      "pandas": "2.2.3",
+      "rank_bm25": "0.2.2"
+    },
+    "missing": [
+      "chromadb",
+      "langchain_chroma",
+      "langchain_huggingface",
+      "langchain_ollama",
+      "sentence_transformers",
+      "torch",
+      "transformers"
+    ]
+  },
+  "local_models": {
+    "ollama_reachable": true,
+    "embedding": {
+      "id": "nomic-embed-text:latest",
+      "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+      "size_bytes": 274302450
+    },
+    "llm_unused_by_runner": {
+      "id": "gemma4:e4b",
+      "digest": "c6eb396dbd5992bbe3f5cdb947e8bbc0ee413d7c17e2beaae69f5d569cf982eb",
+      "size_bytes": 9608350718
+    },
+    "reranker": {
+      "id": "cross-encoder/ms-marco-MiniLM-L-6-v2",
+      "cached": false
+    }
+  },
+  "local_cache_search": {
+    "pip_wheels_for_missing_stack": false,
+    "alternate_environment_with_required_stack": false,
+    "cached_reranker_model": false
+  },
+  "blocker": "The real hybrid pipeline requires the missing PyTorch, Transformers, sentence-transformers, Chroma, and LangChain integration stack plus the uncached cross-encoder model. Installing or downloading that stack exceeds the approved offline and no-multi-GB-dependency timebox.",
+  "results_generated": false
+}

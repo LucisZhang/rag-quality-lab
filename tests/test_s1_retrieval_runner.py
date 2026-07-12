@@ -16,8 +16,12 @@ from langchain_core.documents import Document
 
 from scripts.run_s1_retrieval_ab import (
     evaluate_pipeline_retrieval,
+    file_provenance,
     load_eval_items,
+    pipeline_definitions,
     retrieved_ids_from_docs,
+    sha256_of,
+    write_output_manifest,
 )
 
 DSID_A = "dsid_" + "a" * 32
@@ -139,3 +143,38 @@ def test_load_eval_items_roundtrip_and_validation(tmp_path: Path):
     bad.write_text(json.dumps([{"question": "only-question"}]), encoding="utf-8")
     with pytest.raises(ValueError, match="missing keys"):
         load_eval_items(bad)
+
+
+def test_file_provenance_and_output_manifest_hash_completed_artifacts(tmp_path: Path):
+    comparison = tmp_path / "comparison.json"
+    results = tmp_path / "naive_results.csv"
+    comparison.write_text('{"questions": 130}\n', encoding="utf-8")
+    results.write_text("question_id,retrieval_hit\nqst_1,1.0\n", encoding="utf-8")
+
+    provenance = file_provenance(comparison, records=130)
+    assert provenance["records"] == 130
+    assert provenance["bytes"] == comparison.stat().st_size
+    assert provenance["sha256"] == sha256_of(comparison)
+
+    manifest_path = write_output_manifest(tmp_path, [results, comparison])
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    assert manifest["hash_algorithm"] == "sha256"
+    assert [item["path"] for item in manifest["files"]] == [
+        str(comparison),
+        str(results),
+    ]
+    assert {item["sha256"] for item in manifest["files"]} == {
+        sha256_of(comparison),
+        sha256_of(results),
+    }
+    assert all(item["path"] != str(manifest_path) for item in manifest["files"])
+
+
+def test_pipeline_definitions_capture_real_ab_contract():
+    definitions = pipeline_definitions(k=4)
+    assert definitions["naive"]["final_k"] == 4
+    assert definitions["naive"]["retrieval"] == "dense top-k"
+    assert definitions["hybrid"]["retrieval"].startswith("dense top-10 + BM25")
+    assert definitions["hybrid"]["reranker_model"] == (
+        "cross-encoder/ms-marco-MiniLM-L-6-v2"
+    )
