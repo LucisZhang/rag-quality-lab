@@ -77,12 +77,19 @@ This repo distinguishes two kinds of claims, and every results table below carri
   parsing): re-verified 2026-07 on this copy via `scripts/verify_a3.py` and
   `scripts/verify_data.py`; outputs in `evidence/verified-2026-07/`.
 - **LLM-judged quality metrics** (faithfulness, relevancy, precision, recall, correctness):
-  produced in the **saved 2026-04 runs** with a local `gemma4:e4b` judge, and **re-parsed —
-  not re-judged — in 2026-07**. A fresh judged re-run is scheduled as the first workstation
-  intake job (Track C0). A 2026-07-11 workstation C0/C1 run proved the public clone, CI,
-  EnterpriseRAG-Bench S1 data path, and a PyTorch/HF CUDA embedding smoke, but the fresh
-  Ollama-judged A3 re-run remains blocked by Ollama/driver compatibility; see
-  `evidence/workstation-c0c1-20260711/`. Judged absolute scores from a small local judge should
+  produced in the **saved 2026-04 runs** with a local `gemma4:e4b` judge via Ollama, and
+  **re-parsed — not re-judged — in 2026-07**. A 2026-07-11 workstation C0/C1 run proved the
+  public clone, CI, the EnterpriseRAG-Bench S1 data path, and a PyTorch/HF CUDA embedding
+  smoke — but Ollama itself could not run there (the host's NVIDIA driver 470 predates
+  current Ollama's CUDA-12 requirement), so an **exact same-judge re-run of the 2026-04
+  baseline is closed as infeasible** on available hardware (2026-07-12 decision; the
+  laptop-judge path was closed earlier for speed). The fresh judged lane is re-scoped to a
+  **Hugging Face-runtime local judge (Lane L2)** via this repo's `ollama|hf` backend seam:
+  it tests whether the *findings* (B beats A; the V2 update degrades B) replicate under an
+  independent judge runtime, and its scores will be reported in their own labeled tables,
+  never blended into the 2026-04 columns. Run records live under `evidence/`
+  (`evidence/workstation-c0c1-20260711/` where present; the S1 acquisition record ships in
+  `evidence/c2-s1-mac-20260712/`). Judged absolute scores from a small local judge should
   be read as relative signals between pipelines/versions, not calibrated absolutes.
 
 Dataset provenance, licensing status, and integrity checksums live in [`DATA.md`](DATA.md)
@@ -191,6 +198,23 @@ and buckets per-question metric deltas into improved / degraded / stable.
   synthetic schema samples stand in (`data/sample_*_synthetic.json`). See `DATA.md` §3 for
   the exact quote and the publication rules this repo is bound by.
 
+### EnterpriseRAG-Bench S1 (Track C scale-up — data + adapters ready, no results yet)
+
+The scale-up track moves evaluation onto **EnterpriseRAG-Bench v1.0.0** (MIT, verified on
+both the GitHub LICENSE and HF card 2026-07-11) — a fully synthetic enterprise corpus, so it
+is free of MS MARCO's redistribution constraints. Current scope is **S1 = confluence + jira**:
+11,309 documents and a **130-question answerable pool** with document-level ground truth
+(`expected_doc_ids` at `dsid_*` granularity), which enables **judge-free deterministic
+retrieval evaluation** (`scripts/run_s1_retrieval_ab.py`) ahead of any judged run.
+
+- Acquisition integrity: two machines downloaded the six release files independently and
+  their SHA-256 sums match exactly (`evidence/c2-s1-mac-20260712/`).
+- Adapters (`scripts/adapters/`) convert slices → the lab's KB schema and `questions.jsonl`
+  → the eval schema deterministically; `data/MANIFEST.json` carries both outputs' integrity
+  (the ~88 MB adapted KB stays out of git and regenerates byte-identically).
+- **Status honestly:** no S1 retrieval or quality results exist yet — the first numbers come
+  from the planned GPU-workstation run (C3). Nothing here claims otherwise.
+
 ## 7. Quick start
 
 ### Prerequisites
@@ -218,6 +242,24 @@ ollama pull gemma4:e4b
 ollama pull nomic-embed-text
 ollama serve   # if not already running
 ```
+
+### Model backends (`ollama` default, `hf` optional)
+
+With no configuration, everything uses the local Ollama models above — unchanged behavior.
+On machines where Ollama cannot run (e.g., a GPU host whose NVIDIA driver predates current
+Ollama's CUDA-12 requirement), select the Hugging Face backend per component:
+
+```bash
+export RAG_MODEL_BACKEND=hf              # both components, or use per-component:
+export RAG_EMBEDDING_BACKEND=hf          #   embeddings only (retrieval-only runs)
+export RAG_HF_LLM_MODEL=<org/model-id>       # required for the hf LLM
+export RAG_HF_EMBEDDING_MODEL=<org/model-id> # required for hf embeddings
+# optional: RAG_HF_DEVICE=cuda:0  RAG_HF_MAX_NEW_TOKENS=512  RAG_HF_NORMALIZE_EMBEDDINGS=1
+```
+
+There are deliberately **no default HF model ids**: verify the model card (license,
+size/VRAM) before the first download, then export the id. The `hf` backend needs the full
+lockfile environment (`langchain-huggingface` is pinned there); CI never exercises it.
 
 ### Data
 
@@ -333,13 +375,16 @@ rag-quality-lab/
 │   ├── knowledge_base_v2.json    # 9-doc updated KB (authored)
 │   ├── eval_questions.json       # 12-question controlled eval set (authored)
 │   ├── eval_questions_regression_debug.json  # 4-question debug subset
+│   ├── eval_questions_enterpriserag_s1.json  # 130-question S1 pool (MIT, adapted)
 │   ├── sample_*_synthetic.json   # labeled synthetic schema samples
 │   └── MANIFEST.json             # checksums / sizes / record counts
 ├── results/                      # saved 2026-04 experiment artifacts (CSV/JSON)
-├── evidence/verified-2026-07/    # deterministic re-verification outputs + attempt records
+├── evidence/                     # verification outputs + acquisition records
 ├── scripts/
 │   ├── verify_a3.py              # deterministic re-checks of saved artifacts
 │   ├── verify_data.py            # data integrity vs MANIFEST.json
+│   ├── run_s1_retrieval_ab.py    # judge-free S1 retrieval A/B (deterministic)
+│   ├── adapters/                 # EnterpriseRAG-Bench S1 -> lab schema converters
 │   └── ci/run_verify_a3_deterministic.py  # CI wrapper (stubs heavy deps)
 ├── tests/                        # model-free unit tests (LLM calls mocked)
 ├── tools/                        # dashboard asset-export helper scripts
@@ -377,18 +422,22 @@ design — see `.gitignore` and `docs/A1_COPY_NOTES.md`.)
 | Numerical utilities | NumPy | 1.26.4 | Numeric support |
 | Also pinned | `langchain-huggingface`, `openpyxl` | 0.2.0, 3.1.5 | HF embeddings wrapper, Excel export |
 
-Local model configuration (`src/utils.py`): LLM `gemma4:e4b`, embeddings `nomic-embed-text`,
-Ollama endpoint `http://127.0.0.1:11434`. Pipeline B additionally downloads
+Default model configuration (`src/utils.py`, `ollama` backend): LLM `gemma4:e4b`, embeddings
+`nomic-embed-text`, Ollama endpoint `http://127.0.0.1:11434`; the `hf` backend (§7) swaps
+these for env-named Hugging Face models. Pipeline B additionally downloads
 `cross-encoder/ms-marco-MiniLM-L-6-v2` on first run.
 
 ## 12. Limitations (honest scope)
 
 1. **Judge fidelity and freshness.** Quality metrics come from a small local judge
-   (`gemma4:e4b`) in saved 2026-04 runs. They were deterministically re-parsed in 2026-07 but
-   **not yet re-judged**; the fresh judged re-run is queued for a GPU workstation (a 1-question
-   local re-judge attempt in 2026-07 confirmed the laptop path is impractically slow, and it
-   was closed rather than forced). Treat absolute scores cautiously; deltas between pipelines
-   and KB versions are the meaningful signal.
+   (`gemma4:e4b` via Ollama) in saved 2026-04 runs. They were deterministically re-parsed in
+   2026-07 but **not yet re-judged** — and an exact same-judge re-run is now **closed as
+   infeasible**: the laptop is impractically slow (1-question probe, 2026-07) and the GPU
+   workstation's NVIDIA driver 470 cannot run current Ollama (2026-07-11 run; path retired
+   2026-07-12). The replacement is a fresh **HF-runtime judge lane (Lane L2)** that tests
+   whether the findings replicate under an independent judge runtime; until it runs, treat
+   absolute scores cautiously — deltas between pipelines and KB versions are the meaningful
+   signal.
 2. **Controlled evaluation size.** The high-fidelity A/B and regression workflow runs on a
    small hand-authored 12-question set; the 500-question set drives scale benchmarks, not
    judged quality runs.
