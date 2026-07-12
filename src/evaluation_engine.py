@@ -24,6 +24,49 @@ except ImportError:
         from utils import get_embeddings, get_llm  # type: ignore
 
 
+def normalize_doc_ids(doc_ids: Any) -> list[str]:
+    """Normalize doc ids to a unique, ordered list of non-empty strings."""
+    if doc_ids is None:
+        return []
+    if isinstance(doc_ids, str):
+        stripped = doc_ids.strip()
+        return [stripped] if stripped else []
+    if not isinstance(doc_ids, list):
+        values = [str(doc_ids).strip()]
+    else:
+        values = [str(item).strip() for item in doc_ids]
+
+    normalized: list[str] = []
+    seen: set[str] = set()
+    for value in values:
+        if not value or value in seen:
+            continue
+        seen.add(value)
+        normalized.append(value)
+    return normalized
+
+
+def compute_retrieval_metrics(
+    retrieved_doc_ids: list[str],
+    relevant_doc_ids: list[str],
+) -> dict[str, float]:
+    """Compute deterministic document-level retrieval diagnostics."""
+    retrieved = normalize_doc_ids(retrieved_doc_ids)
+    relevant = normalize_doc_ids(relevant_doc_ids)
+    relevant_set = set(relevant)
+    matched = [doc_id for doc_id in retrieved if doc_id in relevant_set]
+
+    precision = len(matched) / len(retrieved) if retrieved else 0.0
+    recall = len(matched) / len(relevant) if relevant else 1.0
+    hit = 1.0 if matched else 0.0
+
+    return {
+        "retrieval_precision": precision,
+        "retrieval_recall": recall,
+        "retrieval_hit": hit,
+    }
+
+
 class RAGEvaluator:
     """Run RAG pipeline evaluations with RAGAS and an LLM-based fallback."""
 
@@ -386,24 +429,7 @@ class RAGEvaluator:
 
     def _normalize_doc_ids(self, doc_ids: Any) -> list[str]:
         """Normalize retrieved/relevant doc ids to a unique ordered string list."""
-        if doc_ids is None:
-            return []
-        if isinstance(doc_ids, str):
-            stripped = doc_ids.strip()
-            return [stripped] if stripped else []
-        if not isinstance(doc_ids, list):
-            values = [str(doc_ids).strip()]
-        else:
-            values = [str(item).strip() for item in doc_ids]
-
-        normalized: list[str] = []
-        seen: set[str] = set()
-        for value in values:
-            if not value or value in seen:
-                continue
-            seen.add(value)
-            normalized.append(value)
-        return normalized
+        return normalize_doc_ids(doc_ids)
 
     def _context_item_to_text(self, item: Any) -> str:
         """Convert a context object into plain text."""
@@ -465,20 +491,7 @@ class RAGEvaluator:
         relevant_doc_ids: list[str],
     ) -> dict[str, float]:
         """Compute deterministic document-level retrieval diagnostics."""
-        retrieved = self._normalize_doc_ids(retrieved_doc_ids)
-        relevant = self._normalize_doc_ids(relevant_doc_ids)
-        relevant_set = set(relevant)
-        matched = [doc_id for doc_id in retrieved if doc_id in relevant_set]
-
-        precision = len(matched) / len(retrieved) if retrieved else 0.0
-        recall = len(matched) / len(relevant) if relevant else 1.0
-        hit = 1.0 if matched else 0.0
-
-        return {
-            "retrieval_precision": precision,
-            "retrieval_recall": recall,
-            "retrieval_hit": hit,
-        }
+        return compute_retrieval_metrics(retrieved_doc_ids, relevant_doc_ids)
 
     def _message_content_to_text(self, message: Any) -> str:
         """Normalize LangChain response payloads to plain text."""
