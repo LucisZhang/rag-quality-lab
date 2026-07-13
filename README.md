@@ -37,6 +37,22 @@ Historical saved artifacts may remain in the baseline project for audit and code
 inspection. Their old metric values are not the current portfolio claim floor and should
 not be promoted as fresh or C2/C3 results.
 
+## Legacy / archived experiments
+
+The repository retains an older Streamlit workflow and its saved April 2026 experiment
+artifacts for provenance. They are historical outputs, not the current Portfolio v1 result:
+
+- the saved 12-question judged A/B artifacts report a five-metric mean of `0.8093` for
+  Pipeline A and `0.9438` for Pipeline B (`0.809` -> `0.944` when rounded);
+- the saved scale benchmark reached 50,000 indexed documents;
+- a separate MS MARCO-derived corpus contained 498,725 records when measured on
+  2026-07-09 and remains outside Git;
+- the 2026-07 verification only re-parsed committed saved files and ran deterministic
+  checks; it did not re-run judging or produce fresh answer-quality evidence.
+
+These values describe the archived baseline only. They do not describe EnterpriseRAG-Bench
+C2, and they must not be presented as C3 or as a current model-quality comparison.
+
 ## What this public baseline contains
 
 The baseline application demonstrates the project shape:
