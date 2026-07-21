@@ -11,6 +11,26 @@ Retrieval-Augmented Generation pipelines — built to answer the question teams 
 ![Ollama Gemma 4](https://img.shields.io/badge/Ollama%2FGemma%204-Local%20LLM-111827?style=flat-square)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=flat-square)
 
+## 0. Current state at a glance (2026-07)
+
+Two workstreams coexist in this project:
+
+- **Public `main` (this README):** the controlled/MS MARCO-era evaluation platform — the
+  12-question A/B and regression workflow, the saved 2026-04 runs, and the 2026-07
+  deterministic re-verification under `evidence/verified-2026-07/`.
+- **Open reconciliation PR [#1](https://github.com/LucisZhang/rag-quality-lab/pull/1):** the
+  C2 checkpoint that re-founds the lab on an EnterpriseRAG-Bench S1 scope — 11,309 documents
+  (5,189 Confluence + 6,120 Jira), a deterministically regenerable 88.5 MB corpus kept out of
+  Git behind hash-verified MIT-licensed slices, 130 answerable questions, a backend-aware
+  retrieval contract, 68 passing model-free tests, and a judge-free S1 runner that computes
+  document-level precision/recall/hit only. The C3 A/B timebox on that scope deliberately
+  ended with an **explicit no-result record** rather than a metric from a substitute pipeline
+  — the project's core rule is that no metric beats a metric produced by the wrong stack.
+
+Until PR #1 merges, `main` is the baseline: nothing below should be read as claiming the S1
+corpus, the S1 tests, or any S1 quality result already live on `main`. The historical
+12-question comparison in §3 does **not** transfer to the S1 scope.
+
 ## 1. The headline finding: a "harmless" KB update degraded quality, and the lab caught it
 
 A knowledge-base update (V1 → V2: two documents revised, one added — the kind of routine
@@ -67,6 +87,9 @@ architecture differs:
 | Context Recall | 0.800 | 0.925 | +0.125 |
 | Answer Correctness | 0.771 | 0.921 | +0.150 |
 | **Overall Mean** | **0.809** | **0.944** | **+0.135 (+16.6% relative)** |
+
+*All five metrics in this table come from the 12-question controlled set only — treat the
++16.6% lift as a small-set architecture signal, not a general result.*
 
 Pipeline B wins all five metrics; its retrieval-diagnostic recall/hit rate is 1.0 on this set.
 The price appears below in §4: retrieval latency roughly 4.6× Pipeline A's at the 50K-document
@@ -272,7 +295,7 @@ and the synthetic samples.
 ## 10. Project structure
 
 ```text
-rag-quality-lab-portfolio/
+rag-quality-lab/
 ├── app.py                        # Streamlit dashboard (four modes)
 ├── src/
 │   ├── utils.py                  # Ollama clients, JSON loading, chunking, Chroma creation
@@ -348,8 +371,8 @@ Ollama endpoint `http://127.0.0.1:11434`. Pipeline B additionally downloads
 4. **License-gated data publication.** MS MARCO's verified terms (non-commercial research
    only, no redistribution rights — `DATA.md` §3) mean MS MARCO-derived content stays out of
    any public release; the repo documents schemas via synthetic samples instead.
-5. **No UI screenshots yet.** Dashboard screenshots will be added from a live session rather
-   than reconstructed.
+5. **No UI screenshots yet.** Dashboard screenshots will be captured from a live session and
+   added; none are reconstructed or mocked in the meantime.
 
 ## 13. References
 
@@ -359,3 +382,10 @@ Ollama endpoint `http://127.0.0.1:11434`. Pipeline B additionally downloads
 - *Passage Re-ranking with BERT*. arXiv, 2019. <https://arxiv.org/abs/1901.04085>
 - *MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers*. arXiv, 2020. <https://arxiv.org/abs/2002.10957>
 - *MS MARCO: A Human Generated MAchine Reading COmprehension Dataset*. arXiv, 2016. <https://arxiv.org/abs/1611.09268>
+
+## 14. Rights
+
+No open-source license is currently granted for this repository; all rights reserved. Dataset
+licenses are governed separately and strictly: see `DATA.md` for the MS MARCO non-commercial,
+no-redistribution terms this repository is bound by, and the MIT license of the
+EnterpriseRAG-Bench slices used by the reconciliation PR.
