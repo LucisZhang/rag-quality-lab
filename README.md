@@ -1,3 +1,5 @@
+[English](README.md) | [简体中文](README.zh-CN.md)
+
 # 🔬 RAG Quality Lab
 
 A fully local evaluation platform for measuring, comparing, and regression-testing
@@ -18,18 +20,31 @@ Two workstreams coexist in this project:
 - **Public `main` (this README):** the controlled/MS MARCO-era evaluation platform — the
   12-question A/B and regression workflow, the saved 2026-04 runs, and the 2026-07
   deterministic re-verification under `evidence/verified-2026-07/`.
-- **Open reconciliation PR [#1](https://github.com/LucisZhang/rag-quality-lab/pull/1):** the
-  C2 checkpoint that re-founds the lab on an EnterpriseRAG-Bench S1 scope — 11,309 documents
-  (5,189 Confluence + 6,120 Jira), a deterministically regenerable 88.5 MB corpus kept out of
-  Git behind hash-verified MIT-licensed slices, 130 answerable questions, a backend-aware
-  retrieval contract, 68 passing model-free tests, and a judge-free S1 runner that computes
-  document-level precision/recall/hit only. The C3 A/B timebox on that scope deliberately
-  ended with an **explicit no-result record** rather than a metric from a substitute pipeline
-  — the project's core rule is that no metric beats a metric produced by the wrong stack.
+- **Unsynced local C2 checkpoint (not yet in this repository):** a later evidence checkpoint
+  that re-founds the lab on an EnterpriseRAG-Bench v1.0.0 S1 scope (synthetic Confluence and
+  Jira sources) — 11,309 documents (5,189 Confluence + 6,120 Jira), a deterministically
+  regenerable corpus kept out of Git and rebuilt from hash-verified, MIT-licensed source
+  slices, 130 answerable questions with document-level ground truth, a backend-aware
+  retrieval contract, 68 passing model-free tests, and a judge-free retrieval-runner
+  contract. C2 is a data-and-infrastructure evidence floor: it verifies dataset adaptation
+  and evaluation plumbing, **not** retrieval or answer quality. The C3 A/B timebox on that
+  scope deliberately ended with an **explicit no-result record** rather than a metric from a
+  substitute pipeline — no retrieval, answer-quality, judged, or fallback result should be
+  inferred from it. The project's core rule: no metric beats a metric produced by the wrong
+  stack.
 
-Until PR #1 merges, `main` is the baseline: nothing below should be read as claiming the S1
-corpus, the S1 tests, or any S1 quality result already live on `main`. The historical
-12-question comparison in §3 does **not** transfer to the S1 scope.
+Until that C2 sync is reviewed and completed, public `main` is the baseline: nothing below
+should be read as claiming the S1 corpus, the S1 tests, or any S1 quality result is already
+live on `main`. The historical 12-question comparison in §3 does **not** transfer to the S1
+scope.
+
+**Where to start, by reader:** evaluating the evidence → §2, then
+[`evidence/verified-2026-07/`](evidence/verified-2026-07/README.md) and [`DATA.md`](DATA.md);
+running the lab → §7 quick start, then §8 usage guide; reading or extending the code → §5
+architecture, §9 custom pipelines, then `src/` and `tests/`. This repository is a working
+single-machine evaluation lab, not a released or versioned package; evidence freshness is
+tracked per claim in §2, and the next queued evidence item is the fresh judged re-run on a
+workstation (Track C0).
 
 ## 1. The headline finding: a "harmless" KB update degraded quality, and the lab caught it
 
@@ -179,7 +194,7 @@ and buckets per-question metric deltas into improved / degraded / stable.
 
 - Python 3.11 (pinned in `.python-version`)
 - [Ollama](https://ollama.com/)
-- ~15 GB free disk for local models, Chroma persistence, and benchmark artifacts
+- Enough free disk for local models, Chroma persistence, and benchmark artifacts
 
 ### Install
 
@@ -209,6 +224,10 @@ Small controlled datasets ship in `data/`. Verify integrity any time:
 python scripts/verify_data.py
 ```
 
+Expected result: the script re-checks every present data file against `data/MANIFEST.json`
+and exits non-zero on any mismatch (`DATA.md` §4), so a clean exit means the tracked data
+matches the manifest.
+
 The large corpus is not in git; regenerate it (network required, streams MS MARCO v2.1):
 
 ```bash
@@ -220,6 +239,10 @@ python scale_up_dataset.py
 ```bash
 streamlit run app.py
 ```
+
+Expected result: Streamlit starts and serves the dashboard shell on a local port. The
+recorded 2026-07-10 headless smoke test (`docs/A2_ENVIRONMENT.md`) bound `127.0.0.1:8521`
+and answered `HTTP/1.1 200 OK`.
 
 ### Re-verify the saved evidence
 
@@ -240,8 +263,8 @@ The tests cover the model-free core — chunking, hybrid BM25/dense merge-dedupe
 retrieval metrics, and regression diffing — with scripted fakes in place of the vector store,
 cross-encoder, and judge LLM (`tests/dependency_stubs.py` stands in for heavy imports only
 when the full environment is absent). GitHub Actions (`.github/workflows/ci.yml`) runs the
-same four commands plus the deterministic half of `verify_a3.py` on every push; CI never
-performs model inference.
+same four commands plus the deterministic half of `verify_a3.py` on pushes to `main` and on
+pull requests; CI never performs model inference.
 
 ## 8. Usage guide
 
@@ -316,6 +339,7 @@ rag-quality-lab/
 │   ├── verify_data.py            # data integrity vs MANIFEST.json
 │   └── ci/run_verify_a3_deterministic.py  # CI wrapper (stubs heavy deps)
 ├── tests/                        # model-free unit tests (LLM calls mocked)
+├── tools/                        # dashboard asset-export helper scripts
 ├── .github/workflows/ci.yml      # lint + tests + verifiers; no model inference
 ├── docs/                         # A1 copy notes, A2 environment notes
 ├── DATA.md                       # dataset provenance, licensing, verification protocol
@@ -388,4 +412,4 @@ Ollama endpoint `http://127.0.0.1:11434`. Pipeline B additionally downloads
 No open-source license is currently granted for this repository; all rights reserved. Dataset
 licenses are governed separately and strictly: see `DATA.md` for the MS MARCO non-commercial,
 no-redistribution terms this repository is bound by, and the MIT license of the
-EnterpriseRAG-Bench slices used by the reconciliation PR.
+EnterpriseRAG-Bench slices used by the unsynced local C2 checkpoint.
