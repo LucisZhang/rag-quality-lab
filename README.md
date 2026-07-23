@@ -15,36 +15,32 @@ Retrieval-Augmented Generation pipelines — built to answer the question teams 
 
 ## 0. Current state at a glance (2026-07)
 
-Two workstreams coexist in this project:
+The repository now contains two deliberately separated evidence layers:
 
-- **Public `main` (this README):** the controlled/MS MARCO-era evaluation platform — the
-  12-question A/B and regression workflow, the saved 2026-04 runs, and the 2026-07
-  deterministic re-verification under `evidence/verified-2026-07/`.
-- **Unsynced local C2 checkpoint (not yet in this repository):** a later evidence checkpoint
-  that re-founds the lab on an EnterpriseRAG-Bench v1.0.0 S1 scope (synthetic Confluence and
-  Jira sources) — 11,309 documents (5,189 Confluence + 6,120 Jira), a deterministically
-  regenerable corpus kept out of Git and rebuilt from hash-verified, MIT-licensed source
-  slices, 130 answerable questions with document-level ground truth, a backend-aware
-  retrieval contract, 68 passing model-free tests, and a judge-free retrieval-runner
-  contract. C2 is a data-and-infrastructure evidence floor: it verifies dataset adaptation
-  and evaluation plumbing, **not** retrieval or answer quality. The C3 A/B timebox on that
-  scope deliberately ended with an **explicit no-result record** rather than a metric from a
-  substitute pipeline — no retrieval, answer-quality, judged, or fallback result should be
-  inferred from it. The project's core rule: no metric beats a metric produced by the wrong
-  stack.
+- **Historical quality baseline:** the controlled 12-question A/B and regression workflow,
+  saved 2026-04 judged runs, and deterministic 2026-07 re-verification under
+  [`evidence/verified-2026-07/`](evidence/verified-2026-07/README.md). These small-set metrics
+  remain the only published answer-quality results.
+- **EnterpriseRAG-Bench C2 scale-up:** tracked adapters, manifest contracts, 130 answerable
+  questions with document-level ground truth, backend-aware retrieval seams, and model-free
+  tests for processing **11,309 synthetic enterprise documents** — 5,189 Confluence records
+  plus 6,120 Jira records. The roughly 88 MB adapted knowledge base stays out of Git and is
+  regenerated deterministically from hash-verified, MIT-licensed EnterpriseRAG-Bench v1.0.0
+  slices.
 
-Until that C2 sync is reviewed and completed, public `main` is the baseline: nothing below
-should be read as claiming the S1 corpus, the S1 tests, or any S1 quality result is already
-live on `main`. The historical 12-question comparison in §3 does **not** transfer to the S1
-scope.
+C2 proves the data and evaluation infrastructure, not retrieval or answer quality. The later
+C3 A/B timebox ended with an explicit no-result record rather than a metric from a substitute
+pipeline; no retrieval, answer-quality, judged, or fallback C3 result should be inferred. The
+historical 12-question comparison in §3 does **not** transfer to the 11,309-document scope.
+That is the operating rule of this lab: no metric is better than a metric produced by the wrong
+stack.
 
-**Where to start, by reader:** evaluating the evidence → §2, then
-[`evidence/verified-2026-07/`](evidence/verified-2026-07/README.md) and [`DATA.md`](DATA.md);
-running the lab → §7 quick start, then §8 usage guide; reading or extending the code → §5
-architecture, §9 custom pipelines, then `src/` and `tests/`. This repository is a working
-single-machine evaluation lab, not a released or versioned package; evidence freshness is
-tracked per claim in §2, and the next queued evidence item is the fresh judged re-run on a
-workstation (Track C0).
+**Where to start, by reader:** inspect the 11,309-document processing path in §6 and
+[`DATA.md`](DATA.md); evaluate historical claims in §2 and
+[`evidence/verified-2026-07/`](evidence/verified-2026-07/README.md); run the lab in §7; or extend
+the implementation through §5, §9, `src/`, `scripts/adapters/`, and `tests/`. This is a working
+single-machine evaluation lab, not a released or versioned package, and every result carries its
+own evidence date and scope.
 
 ## 1. The headline finding: a "harmless" KB update degraded quality, and the lab caught it
 
@@ -464,4 +460,4 @@ these for env-named Hugging Face models. Pipeline B additionally downloads
 No open-source license is currently granted for this repository; all rights reserved. Dataset
 licenses are governed separately and strictly: see `DATA.md` for the MS MARCO non-commercial,
 no-redistribution terms this repository is bound by, and the MIT license of the
-EnterpriseRAG-Bench slices used by the unsynced local C2 checkpoint.
+EnterpriseRAG-Bench slices used by the tracked C2 data and evaluation infrastructure.
