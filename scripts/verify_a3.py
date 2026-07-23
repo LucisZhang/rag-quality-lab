@@ -21,6 +21,7 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from src.evaluation_engine import RAGEvaluator  # noqa: E402
 from src.rag_pipelines import HybridRerankRAG, NaiveVectorRAG  # noqa: E402
 from src.regression_tester import RegressionTester  # noqa: E402
+from src.utils import get_active_model_config  # noqa: E402
 
 
 DATA_DIR = PROJECT_ROOT / "data"
@@ -105,9 +106,20 @@ def deterministic_checks() -> dict[str, Any]:
         "large_knowledge_base_present": (DATA_DIR / "large_knowledge_base.json").exists(),
     }
 
-    evaluator = RAGEvaluator(evaluation_backend="fallback")
+    # Dataset validation needs no model clients; dummies keep deterministic
+    # mode model-free on every backend (the hf backend would otherwise demand
+    # RAG_HF_* model ids just to parse JSON).
+    evaluator = RAGEvaluator(
+        llm=object(), embeddings=object(), evaluation_backend="fallback"
+    )
     checks["eval_dataset_valid"] = len(
         evaluator.load_eval_dataset(str(DATA_DIR / "eval_questions.json"))
+    )
+    s1_eval_path = DATA_DIR / "eval_questions_enterpriserag_s1.json"
+    checks["s1_eval_dataset_valid"] = (
+        len(evaluator.load_eval_dataset(str(s1_eval_path)))
+        if s1_eval_path.exists()
+        else None
     )
 
     comparison_a = read_json(
@@ -146,7 +158,10 @@ def deterministic_checks() -> dict[str, Any]:
         "max_documents_indexed": int(indexing["Documents"].max()),
     }
 
-    checks["ollama"] = check_ollama_models()
+    model_config = get_active_model_config()
+    checks["model_runtime"] = model_config
+    if "ollama" in {model_config["llm_backend"], model_config["embedding_backend"]}:
+        checks["ollama"] = check_ollama_models()
     return checks
 
 
@@ -234,6 +249,7 @@ def run_fresh(max_questions: int) -> dict[str, Any]:
         "checked_at_utc": utc_now(),
         "max_questions": max_questions,
         "output_dir": str(output_dir),
+        "model_runtime": get_active_model_config(),
         "comparison": {
             "pipeline_a_mean": mean_score(summary_a),
             "pipeline_b_mean": mean_score(summary_b),

@@ -70,6 +70,23 @@
       "bytes_note": "~191 MB measured 2026-07-09; exact bytes to be recorded with the sha256",
       "sha256": null,
       "sha256_note": "file not reachable from this session; compute at Track C0 workstation intake (or any machine holding the file) via scripts/verify_data.py and record here"
+    },
+    {
+      "path": "data/eval_questions_enterpriserag_s1.json",
+      "description": "130-question S1-answerable eval set adapted from EnterpriseRAG-Bench v1.0.0 questions.jsonl (MIT) by scripts/adapters/enterpriserag_s1_to_eval.py; counts derived from the file, not the dataset cards",
+      "in_git": true,
+      "records": 130,
+      "bytes": 296730,
+      "sha256": "b2775a25da1d64d3f7db7e78f262c827ca6ac2bfaa4e173069d62eafdb2348fa"
+    },
+    {
+      "path": "data/knowledge_base_enterpriserag_s1.json",
+      "description": "11,309-document S1 knowledge base (confluence 5,189 + jira 6,120) adapted from EnterpriseRAG-Bench v1.0.0 slices (MIT) by scripts/adapters/enterpriserag_s1_to_kb.py - kept OUT of git (~88 MB); deterministic regeneration from the hash-verified slices reproduces this sha256",
+      "in_git": false,
+      "records": 11309,
+      "bytes": 88535383,
+      "sha256": "8d3a06a06340eea30aa5aeb5e6e243c0278f0097d434de4327b091777ec44dd9",
+      "sha256_note": "computed on the Mac 2026-07-12 from slices sha256-matched to the workstation acquisition (evidence/c2-s1-mac-20260712/); any machine regenerating from the same v1.0.0 slices must reproduce this hash"
     }
   ]
 }

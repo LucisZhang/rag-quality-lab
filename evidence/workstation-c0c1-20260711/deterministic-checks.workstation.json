@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-07-12T01:18:12Z",
+  "checked_at_utc": "2026-07-11T14:36:17Z",
   "data_counts": {
     "knowledge_base_v1": 8,
     "knowledge_base_v2": 9,
@@ -10,7 +10,6 @@
     "large_knowledge_base_present": false
   },
   "eval_dataset_valid": 12,
-  "s1_eval_dataset_valid": 130,
   "saved_metrics": {
     "comparison_pipeline_a_mean": 0.8093333333333332,
     "comparison_pipeline_b_mean": 0.9438333333333333,
@@ -24,19 +23,8 @@
     "latency_rows": 2,
     "max_documents_indexed": 50000
   },
-  "model_runtime": {
-    "llm_backend": "ollama",
-    "llm_model": "gemma4:e4b",
-    "embedding_backend": "ollama",
-    "embedding_model": "nomic-embed-text"
-  },
   "ollama": {
-    "ok": true,
-    "models": [
-      "gemma4:e4b",
-      "nomic-embed-text:latest"
-    ],
-    "has_gemma4_e4b": true,
-    "has_nomic_embed_text": true
+    "ok": false,
+    "error": "URLError: <urlopen error [Errno 111] Connection refused>"
   }
 }

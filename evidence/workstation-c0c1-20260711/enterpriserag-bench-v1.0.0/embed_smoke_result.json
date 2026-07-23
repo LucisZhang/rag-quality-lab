@@ -1,0 +1,15 @@
+{
+  "smoke_type": "pytorch_hf_embedding_fallback",
+  "reason": "Ollama blocked by NVIDIA driver 470 vs current Ollama driver requirement",
+  "model": "BAAI/bge-base-en-v1.5",
+  "docs": 1000,
+  "seconds": 15.73,
+  "sec_per_1k": 15.73,
+  "embedding_dim": 768,
+  "device": "cuda",
+  "cuda_device_name": "NVIDIA RTX A6000",
+  "cuda_visible_devices": "1",
+  "peak_cuda_memory_gb": 1.011,
+  "mac_baseline_sec_per_1k": 13.82,
+  "comparison_note": "Not apples-to-apples with Mac nomic-embed-text/Ollama baseline; this is a PyTorch CUDA fallback smoke."
+}

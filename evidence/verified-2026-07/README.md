@@ -47,3 +47,8 @@ after more than six minutes.
 
 Conclusion: do not claim fresh 12-question re-verification yet. The full fresh A/B + regression
 run should move to a faster workstation or a faster/capped judge configuration.
+
+Follow-up: `evidence/workstation-c0c1-20260711/` records the first workstation C0/C1 attempt.
+That run completed CI-equivalent checks, EnterpriseRAG-Bench S1 acquisition/counts, and a
+PyTorch/HF CUDA embedding smoke, but the original Ollama-judged fresh A3 path remained blocked
+by Ollama/driver compatibility.

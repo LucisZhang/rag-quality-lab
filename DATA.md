@@ -17,6 +17,8 @@ Machine-readable integrity values live in `data/MANIFEST.json`; verify with
 | `data/large_knowledge_base.json` | 498,725 | **no** (~191 MB) | Derived from MS MARCO v2.1 train split via `scale_up_dataset.py` |
 | `data/sample_knowledge_base_synthetic.json` | 5 | yes | Synthetic, written for this repo (schema documentation only) |
 | `data/sample_eval_questions_synthetic.json` | 3 | yes | Synthetic, written for this repo (schema documentation only) |
+| `data/eval_questions_enterpriserag_s1.json` | 130 | yes | Adapted from EnterpriseRAG-Bench v1.0.0 `questions.jsonl` (MIT) via `scripts/adapters/enterpriserag_s1_to_eval.py` |
+| `data/knowledge_base_enterpriserag_s1.json` | 11,309 | **no** (~88 MB) | Adapted from EnterpriseRAG-Bench v1.0.0 confluence+jira slices (MIT) via `scripts/adapters/enterpriserag_s1_to_kb.py` |
 
 ## 2. Provenance detail
 
@@ -52,6 +54,32 @@ the ground truth for "the exact corpus the saved results used".
 corpus/eval schemas are documented in-repo **without republishing MS MARCO content**. They must
 never be used as evaluation data.
 
+### 2.4 EnterpriseRAG-Bench S1 subset (Track C; MIT)
+The Track C scale-up uses **EnterpriseRAG-Bench v1.0.0** (`onyx-dot-app/EnterpriseRAG-Bench`),
+a fully **synthetic** enterprise corpus — an LLM-generated simulation of a fictional company
+("Redwood Inference") — so it carries none of MS MARCO's redistribution concerns. License =
+**MIT**, verified 2026-07-11 on both the GitHub repo LICENSE and the HF dataset card.
+
+- **S1 scope** (GATE 2c decision): the two smallest sources, confluence (5,189 docs) + jira
+  (6,120 docs) = 11,309 documents, ~41 MB zipped. Raw slices are mirrored (gitignored) at
+  `data/enterpriserag-bench/v1.0.0/`; download URLs, SHA-256 sums, and the two-machine
+  integrity cross-check are recorded in `evidence/c2-s1-mac-20260712/`.
+- `data/knowledge_base_enterpriserag_s1.json` (out of git, ~88 MB): built by
+  `scripts/adapters/enterpriserag_s1_to_kb.py`. Each record is
+  `{"id", "title", "content", "source_type"}` where **`id` is the dataset's `dsid_*`
+  document id** (the granularity `questions.jsonl` references). The conversion is
+  deterministic (fixed source order, sorted paths), so regeneration from the hash-verified
+  slices reproduces the manifest SHA-256 on any machine. Known raw-data quirk, preserved
+  as-is: two dsids map to two files each (recorded in the evidence README); those stay
+  separate records sharing an id.
+- `data/eval_questions_enterpriserag_s1.json` (tracked, MIT allows it): built by
+  `scripts/adapters/enterpriserag_s1_to_eval.py` — the 130 questions whose `source_types`
+  ⊆ {confluence, jira}, mapped to the lab's eval schema with `ground_truth` ← `gold_answer`
+  and `relevant_doc_ids` ← deduplicated `expected_doc_ids`. Per-question `question_type` is
+  carried through for per-category reporting. All counts derive from `questions.jsonl`
+  itself, never from the dataset's cards (the HF card and GitHub quickstart disagree on
+  per-category counts).
+
 ## 3. Licensing status and publication rules  (B3 live-verified 2026-07-11)
 
 **MS MARCO's terms were verified live on 2026-07-11** via the GitHub API from
@@ -80,6 +108,10 @@ The binding rules are:
    with `scale_up_dataset.py` instead of receiving a republished copy.
 3. The full corpus never enters git regardless of license outcome (size policy, §2.2).
 4. The small KB/eval files (§2.1) are original in-repo text and carry no such restriction.
+5. **EnterpriseRAG-Bench (§2.4) is MIT and synthetic**: tracking the adapted 130-question
+   eval set in git is permitted and done. The adapted S1 knowledge base still stays out of
+   git — a size/hygiene policy (~88 MB), not a license requirement; it regenerates
+   deterministically from the hash-verified slices.
 
 ## 4. Integrity verification
 
