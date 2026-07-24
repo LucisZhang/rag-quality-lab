@@ -2,9 +2,15 @@
 
 # 🔬 RAG Quality Lab
 
-A fully local evaluation platform for measuring, comparing, and regression-testing
+A fully local evaluation lab for measuring, comparing, and regression-testing
 Retrieval-Augmented Generation pipelines — built to answer the question teams usually skip:
 **did that change actually make answer quality better, or did it silently make it worse?**
+
+The lab answered that question concretely once: a routine knowledge-base update — the kind
+production RAG systems absorb constantly — **degraded the strongest pipeline on every quality
+metric**, and only the regression harness made it visible (§1). That finding is the reason
+this repository has since grown from a controlled 12-question testbed into tracked, tested
+evaluation infrastructure for an 11,309-document synthetic enterprise corpus (§3).
 
 ![Python 3.11](https://img.shields.io/badge/Python-3.11-3776AB?style=flat-square)
 ![LangChain](https://img.shields.io/badge/LangChain-Framework-1C3C3C?style=flat-square)
@@ -13,40 +19,17 @@ Retrieval-Augmented Generation pipelines — built to answer the question teams 
 ![Ollama Gemma 4](https://img.shields.io/badge/Ollama%2FGemma%204-Local%20LLM-111827?style=flat-square)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-FF4B4B?style=flat-square)
 
-## 0. Current state at a glance (2026-07)
+**Reading paths:** the headline finding and its exact scope are §1–§2; the enterprise-scale
+infrastructure is §3; architecture §4; install-and-verify commands §5; evidence rules and data
+provenance §6 and [`DATA.md`](DATA.md); extension points §8; repository map §9. This is a
+working single-machine evaluation lab, not a released or versioned package, and every result
+below carries its own evidence date and scope.
 
-The repository now contains two deliberately separated evidence layers:
+## 1. The finding: a "harmless" KB update degraded quality, and the lab caught it
 
-- **Historical quality baseline:** the controlled 12-question A/B and regression workflow,
-  saved 2026-04 judged runs, and deterministic 2026-07 re-verification under
-  [`evidence/verified-2026-07/`](evidence/verified-2026-07/README.md). These small-set metrics
-  remain the only published answer-quality results.
-- **EnterpriseRAG-Bench C2 scale-up:** tracked adapters, manifest contracts, 130 answerable
-  questions with document-level ground truth, backend-aware retrieval seams, and model-free
-  tests for processing **11,309 synthetic enterprise documents** — 5,189 Confluence records
-  plus 6,120 Jira records. The roughly 88 MB adapted knowledge base stays out of Git and is
-  regenerated deterministically from hash-verified, MIT-licensed EnterpriseRAG-Bench v1.0.0
-  slices.
-
-C2 proves the data and evaluation infrastructure, not retrieval or answer quality. The later
-C3 A/B timebox ended with an explicit no-result record rather than a metric from a substitute
-pipeline; no retrieval, answer-quality, judged, or fallback C3 result should be inferred. The
-historical 12-question comparison in §3 does **not** transfer to the 11,309-document scope.
-That is the operating rule of this lab: no metric is better than a metric produced by the wrong
-stack.
-
-**Where to start, by reader:** inspect the 11,309-document processing path in §6 and
-[`DATA.md`](DATA.md); evaluate historical claims in §2 and
-[`evidence/verified-2026-07/`](evidence/verified-2026-07/README.md); run the lab in §7; or extend
-the implementation through §5, §9, `src/`, `scripts/adapters/`, and `tests/`. This is a working
-single-machine evaluation lab, not a released or versioned package, and every result carries its
-own evidence date and scope.
-
-## 1. The headline finding: a "harmless" KB update degraded quality, and the lab caught it
-
-A knowledge-base update (V1 → V2: two documents revised, one added — the kind of routine
-content refresh production RAG systems absorb constantly) **degraded the strongest pipeline
-on every quality metric**, most sharply on faithfulness. No code changed. Only the documents did.
+A knowledge-base update (V1 → V2: two documents revised, one added) **degraded the strongest
+pipeline on every quality metric**, most sharply on faithfulness. No code changed. Only the
+documents did.
 
 | Metric (Pipeline B, 12-question set) | V1 (baseline) | V2 (updated) | Delta |
 | --- | ---: | ---: | ---: |
@@ -56,42 +39,17 @@ on every quality metric**, most sharply on faithfulness. No code changed. Only t
 | Context Recall | 0.925 | 0.842 | −0.083 |
 | Answer Correctness | 0.921 | 0.846 | −0.075 |
 
-Per-question buckets: **4 degraded / 0 improved / 8 stable** (a question is *degraded* when any
-metric drops more than 0.1). Without a regression harness this ships to users unnoticed; with
-one, it is a reviewable diff (`results/dashboard_regression/`).
+Per-question buckets: **4 degraded / 0 improved / 8 stable** (a question is *degraded* when
+any metric drops more than 0.1). Without a regression harness this ships to users unnoticed;
+with one, it is a reviewable diff (`results/dashboard_regression/`).
 
-*Evidence label:* LLM-judged scores from the **saved run 2026-04** (local `gemma4:e4b` judge),
-**deterministically re-parsed 2026-07** (`scripts/verify_a3.py` →
-`evidence/verified-2026-07/`); **fresh judged re-verification pending (workstation)**. The
-4/0/8 buckets and all counts are deterministically re-verified.
+*Evidence:* LLM-judged scores from the **saved 2026-04 run** (local `gemma4:e4b` judge via
+Ollama), **deterministically re-parsed 2026-07** by `scripts/verify_a3.py` into
+`evidence/verified-2026-07/`. The 4/0/8 buckets and all counts are deterministically
+re-verified; the judged scores themselves have not been re-judged — scope and caveats in §6.
+These 12-question metrics apply to the controlled set only.
 
-## 2. Evidence status — read this before quoting any number
-
-This repo distinguishes two kinds of claims, and every results table below carries its label:
-
-- **Deterministic facts** (dataset counts, file checksums, indexing/latency timings, saved-file
-  parsing): re-verified 2026-07 on this copy via `scripts/verify_a3.py` and
-  `scripts/verify_data.py`; outputs in `evidence/verified-2026-07/`.
-- **LLM-judged quality metrics** (faithfulness, relevancy, precision, recall, correctness):
-  produced in the **saved 2026-04 runs** with a local `gemma4:e4b` judge via Ollama, and
-  **re-parsed — not re-judged — in 2026-07**. A 2026-07-11 workstation C0/C1 run proved the
-  public clone, CI, the EnterpriseRAG-Bench S1 data path, and a PyTorch/HF CUDA embedding
-  smoke — but Ollama itself could not run there (the host's NVIDIA driver 470 predates
-  current Ollama's CUDA-12 requirement), so an **exact same-judge re-run of the 2026-04
-  baseline is closed as infeasible** on available hardware (2026-07-12 decision; the
-  laptop-judge path was closed earlier for speed). The fresh judged lane is re-scoped to a
-  **Hugging Face-runtime local judge (Lane L2)** via this repo's `ollama|hf` backend seam:
-  it tests whether the *findings* (B beats A; the V2 update degrades B) replicate under an
-  independent judge runtime, and its scores will be reported in their own labeled tables,
-  never blended into the 2026-04 columns. Run records live under `evidence/`
-  (`evidence/workstation-c0c1-20260711/` where present; the S1 acquisition record ships in
-  `evidence/c2-s1-mac-20260712/`). Judged absolute scores from a small local judge should
-  be read as relative signals between pipelines/versions, not calibrated absolutes.
-
-Dataset provenance, licensing status, and integrity checksums live in [`DATA.md`](DATA.md)
-and `data/MANIFEST.json`.
-
-## 3. Pipeline A/B comparison — quality vs. latency, both sides measured
+## 2. Why "strongest pipeline" is an evidenced claim: the A/B comparison
 
 Same 12-question evaluation set, same knowledge base, same judge; only the retrieval
 architecture differs:
@@ -109,22 +67,18 @@ architecture differs:
 | Answer Correctness | 0.771 | 0.921 | +0.150 |
 | **Overall Mean** | **0.809** | **0.944** | **+0.135 (+16.6% relative)** |
 
-*All five metrics in this table come from the 12-question controlled set only — treat the
-+16.6% lift as a small-set architecture signal, not a general result.*
+Pipeline B wins all five metrics (its retrieval recall/hit rate is 1.0 on this set) — treat
+the +16.6% lift as a small-set architecture signal, not a general result. Quality is one side
+of the decision; the harness measured the cost side too:
 
-Pipeline B wins all five metrics; its retrieval-diagnostic recall/hit rate is 1.0 on this set.
-The price appears below in §4: retrieval latency roughly 4.6× Pipeline A's at the 50K-document
-scale. That pair of numbers — quality lift and its latency cost — is the architecture decision
-this lab exists to make measurable.
+| Pipeline | P50 (ms) | P95 (ms) | P99 (ms) | Mean (ms) |
+| --- | ---: | ---: | ---: | ---: |
+| Pipeline A | 28.13 | 37.39 | 39.65 | 29.15 |
+| Pipeline B | 128.44 | 188.41 | 212.43 | 134.15 |
 
-*Evidence label:* judged metrics = saved run 2026-04, deterministically re-parsed 2026-07
-(mean 0.8093 → 0.9438, relative lift +16.6%); fresh judged re-verification pending
-(workstation). Source artifacts: `results/dashboard_comparison/`.
-
-## 4. Scale benchmarks (deterministic timings, saved run 2026-04)
-
-Indexing throughput on the MS MARCO-derived corpus (embeddings: `nomic-embed-text` via Ollama,
-local machine):
+Retrieval latency on a cached 50K-document index (100 deterministic queries): Pipeline B pays
+roughly 4.6× Pipeline A's latency for its quality lift. Indexing throughput on the same
+MS MARCO-derived corpus (`nomic-embed-text` embeddings via Ollama, laptop-class machine):
 
 | Documents | Vectors Indexed | Time (s) | Seconds per 1K Docs |
 | ---: | ---: | ---: | ---: |
@@ -133,20 +87,53 @@ local machine):
 | 10,000 | 11,290 | 134.85 | 13.49 |
 | 50,000 | 56,039 | 691.17 | 13.82 |
 
-Retrieval latency on the cached 50K-document index (100 deterministic queries):
+*Evidence:* judged metrics = saved run 2026-04, deterministically re-parsed 2026-07 (means
+0.8093 → 0.9438, relative lift +16.6%; artifacts in `results/dashboard_comparison/`).
+Latency/indexing timings are deterministic saved artifacts
+(`results/scale_performance/*.csv`, 2026-04), re-parsed 2026-07. At ~13.8 s per 1K docs,
+embedding the full 498,725-record corpus extrapolates to roughly 1.9 hours on this hardware —
+an extrapolation, not a measurement.
 
-| Pipeline | P50 (ms) | P95 (ms) | P99 (ms) | Mean (ms) |
-| --- | ---: | ---: | ---: | ---: |
-| Pipeline A | 28.13 | 37.39 | 39.65 | 29.15 |
-| Pipeline B | 128.44 | 188.41 | 212.43 | 134.15 |
+## 3. From 12 questions to 11,309 enterprise documents
 
-*Evidence label:* timings are deterministic saved artifacts
-(`results/scale_performance/*.csv`, 2026-04), re-parsed 2026-07. They characterize a laptop-class
-machine; at ~13.8 s per 1K docs, embedding the full 498,725-record corpus extrapolates to
-roughly 1.9 hours — the quantified argument for GPU-workstation runs (extrapolation, not a
-measurement).
+The 12-question harness proved the point on a corpus small enough to audit by hand: RAG
+changes need an evidence-backed quality gate, because harmless-looking changes break things.
+The follow-on question was whether the same evaluation lifecycle — versioned datasets,
+manifest-verified integrity, deterministic re-verification, model-free CI — holds up on an
+enterprise-shaped corpus too large to eyeball. That scale-up is now tracked in this
+repository as working infrastructure:
 
-## 5. Architecture
+- **Corpus:** **EnterpriseRAG-Bench v1.0.0** (MIT, verified 2026-07-11 on both the GitHub
+  LICENSE and the HF dataset card) — a fully synthetic enterprise corpus, free of MS MARCO's
+  redistribution constraints. Current scope: confluence + jira slices, **5,189 + 6,120 =
+  11,309 documents**, with a **130-question answerable pool** carrying document-level ground
+  truth (`expected_doc_ids` at `dsid_*` granularity).
+- **Acquisition integrity:** two machines downloaded the six release files independently;
+  SHA-256 sums match 6/6 (`evidence/c2-s1-mac-20260712/`,
+  `evidence/workstation-c0c1-20260711/`).
+- **Deterministic adapters** (`scripts/adapters/`): slices → the lab's KB schema, and
+  `questions.jsonl` → the eval schema. The ~88 MB adapted KB stays out of git and regenerates
+  **byte-identically** — `data/MANIFEST.json` records the SHA-256 any machine must reproduce.
+  Raw-data quirks (duplicate `dsid` ids) are documented, not silently patched
+  (`evidence/c2-s1-mac-20260712/`).
+- **Judge-free retrieval runner** (`scripts/run_s1_retrieval_ab.py`): document-level ground
+  truth makes retrieval precision/recall/hit deterministically scorable with **no LLM judge**.
+  Each run records dataset and adapter hashes, exact pipeline definitions, package versions,
+  and a manifest hashing every result artifact.
+- **Backend seam** (`src/utils.py`): every model access goes through `ollama|hf` factory
+  functions selected per component by environment variable, so the same pipelines run on
+  machines where Ollama cannot (§5).
+- **Tests and CI:** the adapters, runner contract, and backend seam are covered by model-free
+  unit tests (`tests/`), and CI (`.github/workflows/ci.yml`) runs lint, tests, and both data
+  and artifact verifiers on every push and pull request — no model inference required.
+
+**Scope, stated exactly:** the quality metrics in §1–§2 belong to the saved 12-question runs
+only and do **not** transfer to this corpus. At the 11,309-document scale the repository
+demonstrates data and evaluation infrastructure — no retrieval or answer-quality results
+exist at this scale yet. When they are produced, they will come from the tracked runner with
+their own provenance record, in their own labeled tables.
+
+## 4. Architecture
 
 ```text
 +----------------------------------------------------------------------------------+
@@ -173,45 +160,20 @@ measurement).
                                            |
                                            v
 +----------------------------------------------------------------------------------+
-| Layer 4. Versioned Knowledge Base (data/ - see DATA.md)                          |
+| Layer 4. Versioned Knowledge Bases (data/ - see DATA.md)                         |
 |   Controlled: V1 (8 docs) / V2 (9 docs) + 12-question eval set (authored)        |
 |   Scale: 498,725 MS MARCO-derived passages (out of git) + 500 eval queries       |
+|   Enterprise: 11,309 EnterpriseRAG-Bench docs (out of git, adapter-regenerated)  |
+|               + 130-question answerable pool (tracked)                           |
 +----------------------------------------------------------------------------------+
 ```
 
 The regression harness (`src/regression_tester.py`) runs one pipeline against both KB versions
-and buckets per-question metric deltas into improved / degraded / stable.
+and buckets per-question metric deltas into improved / degraded / stable. The EnterpriseRAG
+adapters (`scripts/adapters/`) feed Layer 4, so the same pipelines and evaluator run unchanged
+against the enterprise corpus.
 
-## 6. Data & licensing (summary — the full record is `DATA.md`)
-
-- Small KBs and the 12-question eval set are **original text authored in `prepare_data.py`**.
-- The 191 MB / 498,725-record corpus and the 500-question eval set are **derived from Microsoft
-  MS MARCO v2.1** by `scale_up_dataset.py`. Both stay **out of git** in the public repo;
-  integrity travels via `data/MANIFEST.json` expected counts + `scripts/verify_data.py`.
-- **MS MARCO terms live-verified 2026-07-11**: "non-commercial research purposes only …
-  without extending any license or other intellectual property rights" (`microsoft/msmarco`
-  `Notice.md`, read via GitHub API). No corpus records are republished here; clearly-labeled
-  synthetic schema samples stand in (`data/sample_*_synthetic.json`). See `DATA.md` §3 for
-  the exact quote and the publication rules this repo is bound by.
-
-### EnterpriseRAG-Bench S1 (Track C scale-up — data + adapters ready, no results yet)
-
-The scale-up track moves evaluation onto **EnterpriseRAG-Bench v1.0.0** (MIT, verified on
-both the GitHub LICENSE and HF card 2026-07-11) — a fully synthetic enterprise corpus, so it
-is free of MS MARCO's redistribution constraints. Current scope is **S1 = confluence + jira**:
-11,309 documents and a **130-question answerable pool** with document-level ground truth
-(`expected_doc_ids` at `dsid_*` granularity), which enables **judge-free deterministic
-retrieval evaluation** (`scripts/run_s1_retrieval_ab.py`) ahead of any judged run.
-
-- Acquisition integrity: two machines downloaded the six release files independently and
-  their SHA-256 sums match exactly (`evidence/c2-s1-mac-20260712/`).
-- Adapters (`scripts/adapters/`) convert slices → the lab's KB schema and `questions.jsonl`
-  → the eval schema deterministically; `data/MANIFEST.json` carries both outputs' integrity
-  (the ~88 MB adapted KB stays out of git and regenerates byte-identically).
-- **Status honestly:** no S1 retrieval or quality results exist yet — the first numbers come
-  from the planned GPU-workstation run (C3). Nothing here claims otherwise.
-
-## 7. Quick start
+## 5. Quick start
 
 ### Prerequisites
 
@@ -269,10 +231,13 @@ Expected result: the script re-checks every present data file against `data/MANI
 and exits non-zero on any mismatch (`DATA.md` §4), so a clean exit means the tracked data
 matches the manifest.
 
-The large corpus is not in git; regenerate it (network required, streams MS MARCO v2.1):
+The two large corpora are not in git; regenerate them locally:
 
 ```bash
-python scale_up_dataset.py
+python scale_up_dataset.py                        # streams MS MARCO v2.1 (network required)
+python scripts/adapters/enterpriserag_s1_to_kb.py # rebuilds the 11,309-doc enterprise KB;
+                                                  # first download+extract the v1.0.0 slices
+                                                  # (URLs+checksums: evidence/c2-s1-mac-20260712/)
 ```
 
 ### Launch
@@ -301,13 +266,46 @@ python scripts/verify_data.py        # data integrity vs data/MANIFEST.json
 ```
 
 The tests cover the model-free core — chunking, hybrid BM25/dense merge-dedupe-rerank,
-retrieval metrics, and regression diffing — with scripted fakes in place of the vector store,
-cross-encoder, and judge LLM (`tests/dependency_stubs.py` stands in for heavy imports only
-when the full environment is absent). GitHub Actions (`.github/workflows/ci.yml`) runs the
-same four commands plus the deterministic half of `verify_a3.py` on pushes to `main` and on
-pull requests; CI never performs model inference.
+retrieval metrics, regression diffing, the EnterpriseRAG adapters, the retrieval runner's
+provenance contract, and backend selection — with scripted fakes in place of the vector
+store, cross-encoder, and judge LLM (`tests/dependency_stubs.py` stands in for heavy imports
+only when the full environment is absent). GitHub Actions (`.github/workflows/ci.yml`) runs
+the same four commands plus the deterministic half of `verify_a3.py` on pushes to `main` and
+on pull requests; CI never performs model inference.
 
-## 8. Usage guide
+## 6. Evidence rules and data provenance
+
+Every results table above carries its label; the rules behind the labels:
+
+- **Deterministic facts** (dataset counts, file checksums, indexing/latency timings,
+  saved-file parsing) are re-verified 2026-07 on this copy via `scripts/verify_a3.py` and
+  `scripts/verify_data.py`; outputs live in `evidence/verified-2026-07/`.
+- **LLM-judged quality metrics** (§1–§2) were produced in the saved 2026-04 runs with a local
+  `gemma4:e4b` judge via Ollama and **re-parsed — not re-judged — in 2026-07**. An exact
+  same-judge re-run is closed as infeasible on available hardware: the laptop judge is
+  impractically slow, and the GPU workstation's NVIDIA driver 470 predates current Ollama's
+  CUDA-12 requirement (run record: `evidence/workstation-c0c1-20260711/`). The planned
+  replacement is a local judge on the Hugging Face runtime, through the same backend seam as
+  §5 — it will test whether the *findings* (B beats A; the V2 update degrades B) replicate
+  under an independent judge runtime, reported in its own labeled tables, never blended into
+  the 2026-04 columns. Until then, read judged absolute scores from a small local judge as
+  relative signals between pipelines/versions, not calibrated absolutes.
+
+Dataset provenance in one line each (full record: [`DATA.md`](DATA.md), integrity values:
+`data/MANIFEST.json`):
+
+- Small KBs and the 12-question eval set are **original text authored in `prepare_data.py`**.
+- The 191 MB / 498,725-record corpus and the 500-question eval set are **derived from
+  Microsoft MS MARCO v2.1** by `scale_up_dataset.py` and stay **out of git**: MS MARCO's
+  terms (live-verified 2026-07-11 — "non-commercial research purposes only … without
+  extending any license or other intellectual property rights") grant no redistribution
+  rights. Clearly-labeled synthetic schema samples stand in (`data/sample_*_synthetic.json`);
+  see `DATA.md` §3 for the exact quote and publication rules.
+- The EnterpriseRAG-Bench S1 corpus and question pool (§3) are **MIT and fully synthetic**;
+  the adapted 130-question set is tracked, the ~88 MB adapted KB regenerates
+  deterministically from hash-verified slices.
+
+## 7. Usage guide
 
 **Tab 1 — Interactive Query:** run one question through Pipeline A or B; inspect retrieved
 documents (id, title, score) next to the generated answer.
@@ -317,16 +315,23 @@ slider 2–12); outputs a radar chart, grouped bars, per-question score table, a
 conclusion. Artifacts land in `results/dashboard_comparison/`.
 
 **Tab 3 — Regression Test:** compare one pipeline across `knowledge_base_v1.json` vs
-`knowledge_base_v2.json`. Shows metric-delta table, improved/degraded/stable counts, per-question
-status cards (V1 vs V2 answers, retrieved doc ids, per-metric deltas), and a KB-change summary
-(added/modified/removed/unchanged docs). Thresholds: degraded if any metric < −0.1, improved if
-any metric > +0.1, else stable. Artifacts land in `results/dashboard_regression/`.
+`knowledge_base_v2.json`. Shows metric-delta table, improved/degraded/stable counts,
+per-question status cards (V1 vs V2 answers, retrieved doc ids, per-metric deltas), and a
+KB-change summary (added/modified/removed/unchanged docs). Thresholds: degraded if any metric
+< −0.1, improved if any metric > +0.1, else stable. Artifacts land in
+`results/dashboard_regression/`.
 
 **Tab 4 — Scale & Performance:** indexing benchmark over 1K/5K/10K/50K corpus subsets and a
 retrieval-only latency benchmark (100 deterministic queries against the cached 50K index).
 Artifacts land in `results/scale_performance/`.
 
-## 9. Extending with custom pipelines
+For the enterprise corpus, the judge-free retrieval A/B runs from the command line:
+
+```bash
+python scripts/run_s1_retrieval_ab.py --help   # pipelines, question caps, output dir
+```
+
+## 8. Extending with custom pipelines
 
 Pipelines share one contract (`src/rag_pipelines.py`):
 
@@ -356,13 +361,13 @@ and `relevant_doc_ids` (which may be empty, as in the regenerated
 `data/large_eval_questions.json`). Data file schemas are documented with examples in `DATA.md`
 and the synthetic samples.
 
-## 10. Project structure
+## 9. Project structure
 
 ```text
 rag-quality-lab/
 ├── app.py                        # Streamlit dashboard (four modes)
 ├── src/
-│   ├── utils.py                  # Ollama clients, JSON loading, chunking, Chroma creation
+│   ├── utils.py                  # model backend seam (ollama|hf), JSON loading, chunking
 │   ├── rag_pipelines.py          # BaseRAGPipeline, NaiveVectorRAG, HybridRerankRAG
 │   ├── evaluation_engine.py      # RAGEvaluator (RAGAS + local-judge fallback)
 │   └── regression_tester.py      # RegressionTester and report generation
@@ -371,7 +376,7 @@ rag-quality-lab/
 │   ├── knowledge_base_v2.json    # 9-doc updated KB (authored)
 │   ├── eval_questions.json       # 12-question controlled eval set (authored)
 │   ├── eval_questions_regression_debug.json  # 4-question debug subset
-│   ├── eval_questions_enterpriserag_s1.json  # 130-question S1 pool (MIT, adapted)
+│   ├── eval_questions_enterpriserag_s1.json  # 130-question enterprise pool (MIT, adapted)
 │   ├── sample_*_synthetic.json   # labeled synthetic schema samples
 │   └── MANIFEST.json             # checksums / sizes / record counts
 ├── results/                      # saved 2026-04 experiment artifacts (CSV/JSON)
@@ -379,8 +384,8 @@ rag-quality-lab/
 ├── scripts/
 │   ├── verify_a3.py              # deterministic re-checks of saved artifacts
 │   ├── verify_data.py            # data integrity vs MANIFEST.json
-│   ├── run_s1_retrieval_ab.py    # judge-free S1 retrieval A/B (deterministic)
-│   ├── adapters/                 # EnterpriseRAG-Bench S1 -> lab schema converters
+│   ├── run_s1_retrieval_ab.py    # judge-free enterprise retrieval A/B (deterministic)
+│   ├── adapters/                 # EnterpriseRAG-Bench -> lab schema converters
 │   └── ci/run_verify_a3_deterministic.py  # CI wrapper (stubs heavy deps)
 ├── tests/                        # model-free unit tests (LLM calls mocked)
 ├── tools/                        # dashboard asset-export helper scripts
@@ -395,10 +400,10 @@ rag-quality-lab/
 └── requirements-lock-py311.txt   # pinned reproducibility lockfile
 ```
 
-(The full corpus, Chroma stores, venvs, and generated runtime artifacts are gitignored by
+(The full corpora, Chroma stores, venvs, and generated runtime artifacts are gitignored by
 design — see `.gitignore` and `docs/A1_COPY_NOTES.md`.)
 
-## 11. Technology stack
+## 10. Technology stack
 
 | Component | Technology | Version (lockfile) | Purpose |
 | --- | --- | --- | --- |
@@ -419,34 +424,32 @@ design — see `.gitignore` and `docs/A1_COPY_NOTES.md`.)
 | Also pinned | `langchain-huggingface`, `openpyxl` | 0.2.0, 3.1.5 | HF embeddings wrapper, Excel export |
 
 Default model configuration (`src/utils.py`, `ollama` backend): LLM `gemma4:e4b`, embeddings
-`nomic-embed-text`, Ollama endpoint `http://127.0.0.1:11434`; the `hf` backend (§7) swaps
+`nomic-embed-text`, Ollama endpoint `http://127.0.0.1:11434`; the `hf` backend (§5) swaps
 these for env-named Hugging Face models. Pipeline B additionally downloads
 `cross-encoder/ms-marco-MiniLM-L-6-v2` on first run.
 
-## 12. Limitations (honest scope)
+## 11. Limitations (honest scope)
 
 1. **Judge fidelity and freshness.** Quality metrics come from a small local judge
-   (`gemma4:e4b` via Ollama) in saved 2026-04 runs. They were deterministically re-parsed in
-   2026-07 but **not yet re-judged** — and an exact same-judge re-run is now **closed as
-   infeasible**: the laptop is impractically slow (1-question probe, 2026-07) and the GPU
-   workstation's NVIDIA driver 470 cannot run current Ollama (2026-07-11 run; path retired
-   2026-07-12). The replacement is a fresh **HF-runtime judge lane (Lane L2)** that tests
-   whether the findings replicate under an independent judge runtime; until it runs, treat
-   absolute scores cautiously — deltas between pipelines and KB versions are the meaningful
-   signal.
+   (`gemma4:e4b` via Ollama) in saved 2026-04 runs, re-parsed but not re-judged in 2026-07;
+   an exact same-judge re-run is closed as infeasible on available hardware (§6). Until the
+   planned HF-runtime judge lane runs, treat absolute scores cautiously — deltas between
+   pipelines and KB versions are the meaningful signal.
 2. **Controlled evaluation size.** The high-fidelity A/B and regression workflow runs on a
    small hand-authored 12-question set; the 500-question set drives scale benchmarks, not
    judged quality runs.
-3. **Single-machine scope.** Everything runs on one local machine; the scale story tops out at
-   a 50K-document index on a laptop. Larger-scale runs are a planned workstation track with
-   its own evidence discipline.
-4. **License-gated data publication.** MS MARCO's verified terms (non-commercial research
+3. **No quality results at enterprise scale yet.** The 11,309-document scope (§3) is
+   evidence-verified data and evaluation infrastructure; its first retrieval numbers will
+   come from `scripts/run_s1_retrieval_ab.py` with their own provenance record.
+4. **Single-machine scope.** Everything runs on one local machine; the measured scale story
+   tops out at a 50K-document index on a laptop.
+5. **License-gated data publication.** MS MARCO's verified terms (non-commercial research
    only, no redistribution rights — `DATA.md` §3) mean MS MARCO-derived content stays out of
    any public release; the repo documents schemas via synthetic samples instead.
-5. **No UI screenshots yet.** Dashboard screenshots will be captured from a live session and
+6. **No UI screenshots yet.** Dashboard screenshots will be captured from a live session and
    added; none are reconstructed or mocked in the meantime.
 
-## 13. References
+## 12. References
 
 - *Corrective Retrieval Augmented Generation*. arXiv, 2024. <https://arxiv.org/abs/2401.15884>
 - *Ragas: Automated Evaluation of Retrieval Augmented Generation*. arXiv, 2023. <https://arxiv.org/abs/2309.15217>
@@ -455,9 +458,10 @@ these for env-named Hugging Face models. Pipeline B additionally downloads
 - *MiniLM: Deep Self-Attention Distillation for Task-Agnostic Compression of Pre-Trained Transformers*. arXiv, 2020. <https://arxiv.org/abs/2002.10957>
 - *MS MARCO: A Human Generated MAchine Reading COmprehension Dataset*. arXiv, 2016. <https://arxiv.org/abs/1611.09268>
 
-## 14. Rights
+## 13. Rights
 
 No open-source license is currently granted for this repository; all rights reserved. Dataset
 licenses are governed separately and strictly: see `DATA.md` for the MS MARCO non-commercial,
 no-redistribution terms this repository is bound by, and the MIT license of the
-EnterpriseRAG-Bench slices used by the tracked C2 data and evaluation infrastructure.
+EnterpriseRAG-Bench slices used by the tracked enterprise-scale data and evaluation
+infrastructure.
